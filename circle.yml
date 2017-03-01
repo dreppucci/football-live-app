@@ -1,0 +1,37 @@
+## Customize the test machine
+machine:
+
+  timezone:
+    Europe/Rome # Set the timezone
+
+  # Version of ruby to use
+  ruby:
+    version:
+      2.4.0
+  node:
+    version:
+      7.2.1
+
+  # Override /etc/hosts
+  hosts:
+    circlehost: 127.0.0.1
+
+  # Add some environment variables
+  environment:
+    USER_NAME: dreppucci
+    USER_EMAIL: davide.reppucci@gmail.com
+    CIRCLE_ENV: production
+
+general:
+  branches:
+    only:
+      - master
+      - /feature_.*/
+    ignore:
+      - gh-pages
+
+deployment:
+  production:
+    branch: [master, /feature_.*/]
+    commands:
+      - ./scripts/deploy-ghpages.sh

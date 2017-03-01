@@ -1,0 +1,10 @@
+<form (ngSubmit)="submitState(localState.league)" autocomplete="off">
+
+  <input
+    name="league"
+    [(ngModel)]="localState.league"
+    placeholder="Type league name"
+    autofocus>
+
+  <button>Submit Value</button>
+</form>

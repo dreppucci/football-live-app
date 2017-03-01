@@ -1,0 +1,37 @@
+header
+  background: $color-global-black
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  z-index: 90
+
+.header__wrapper
+  @include clearfix()
+  @include css3-prefix('display', 'flex')
+  @include css3-prefix('flew-flow', 'row nowrap')
+  @include css3-prefix('justify-content', 'center')
+
+.header__logo
+  width: 40px
+  @include css3-prefix('align-self', 'center')
+  margin-right: 1em
+  fill: $color-global-white
+
+  @include bp-1024-landscape()
+    width: 30px
+
+  @include bp-767()
+    width: 30px
+
+.header__title
+  color: $color-global-white
+  @include font-size(18)
+  line-height: 1em
+  @include css3-prefix('align-self', 'center')
+
+  @include bp-1024-landscape()
+    @include font-size(14)
+
+  @include bp-767()
+    @include font-size(14)

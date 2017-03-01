@@ -1,0 +1,59 @@
+*::-webkit-selection
+  background: $color-global-tab
+  color: $color-global-white
+  text-shadow: none
+
+::-moz-selection
+  background: $color-global-tab
+  color: $color-global-white
+  text-shadow: none
+
+::selection
+  background: $color-global-tab
+  color: $color-global-white
+  text-shadow: none
+
+html
+  font-smooth:always
+  -webkit-font-smoothing: antialiased
+  -moz-font-smoothing: antialiased
+  height: 100%;
+
+  body
+    min-width: initial !important
+    font-smooth:always
+    -webkit-font-smoothing: antialiased
+    -moz-font-smoothing: antialiased
+    overflow-x: hidden;
+
+app
+  width: 100%
+  overflow: hidden
+  background: $color-global-white
+  color: $color-global-black
+  font-size: 75%
+  @extend %font-family-montserrat
+  line-height: 1.3em
+
+main
+  padding-top: 70px
+
+.is-visible
+  display: block;
+
+.is-hidden
+  display: none;
+
+.is-active
+  text-decoration: none;
+  pointer-events: none;
+
+.is-placeholder-focused
+  @include font-size(8)
+  @include css3-prefix('transform', 'translate(0%, -170%)')
+
+  @include bp-1024-landscape()
+    @include css3-prefix('transform', 'translate(0%, -130%)')
+
+[placeholder]:focus::-webkit-input-placeholder
+  color: transparent;

@@ -1,0 +1,20 @@
+<header>
+  <div class="header__wrapper">
+    <img src="assets/gfx/lgo.svg" class="header__logo" alt="logo" />
+    <h1 class="header__title">Football live app</h1>
+
+    <nav>
+      <a [routerLink]=" ['./'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        Index
+      </a>
+      <a [routerLink]=" ['./about'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        About
+      </a>
+    </nav>
+  </div>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>
