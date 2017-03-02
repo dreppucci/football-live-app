@@ -1,56 +1,70 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import { Component, AfterViewInit, NgZone, ChangeDetectorRef,
+  ApplicationRef, ViewChild, ElementRef } from '@angular/core';
+
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '../app.service';
+import { HttpClient } from '../shared/http-client';
+
+import { Observable }  from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/throttleTime';
+import 'rxjs/add/observable/fromEvent';
 
 @Component({
   selector: 'search-league',
+  providers: [HttpClient],
   templateUrl: '../templates/search-league.html'
 })
-export class SearchLeagueComponent implements OnInit {
+export class SearchLeagueComponent implements AfterViewInit {
 
-  public localState = { league: '' };
+  public localState = { league: '', leaguesListJson: null, leaguesList: [] };
+  @ViewChild('league') public inputElRef: ElementRef;
 
   constructor(
     public route: ActivatedRoute,
-    public appState: AppState
-  ) {}
-
-  public ngOnInit() {
-    /*this.route
-      .data
-      .subscribe((data: any) => {
-        // your resolved data from route
-        this.localState = data.yourData;
-      });*/
-
-    console.log('hello `Search-league` component');
-    // static data that is bundled
-    // var mockData = require('assets/mock-data/mock-data.json');
-    // console.log('mockData', mockData);
-    // if you're working with mock data you can also use http.get('assets/mock-data/mock-data.json')
-    // this.asyncDataWithWebpack();
+    public appState: AppState,
+    private ngzone: NgZone,
+    private cdref: ChangeDetectorRef,
+    private appref: ApplicationRef,
+    private http: HttpClient
+  ) {
+    console.clear();
   }
+
+  public ngAfterViewInit () {
+    this.ngzone.runOutsideAngular( () => {
+      Observable.fromEvent(this.inputElRef.nativeElement, 'keyup')
+        .debounceTime(1000)
+        .subscribe( (keyboardEvent: any) => {
+          this.localState.league = keyboardEvent.target.value;
+          this.cdref.detectChanges();
+          this.getLeaguesList();
+        });
+    });
+  }
+
   public submitState(value: string) {
     console.log('submitState', value);
     this.appState.set('value', value);
     this.localState.league = '';
   }
-  private asyncDataWithWebpack() {
-    // you can also async load mock data with 'es6-promise-loader'
-    // you would do this if you don't want the mock-data bundled
-    // remember that 'es6-promise-loader' is a promise
-    setTimeout(() => {
 
-      System.import('../../assets/mock-data/mock-data.json')
-        .then((json) => {
-          console.log('async mockData', json);
-          this.localState = json;
-        });
+  private getLeaguesList() {
+    return this.http.get(`http://api.football-data.org/v1/competitions`)
+    .subscribe(
+      (data: any) => this.showFilteredLeaguesList(data),
+      (error) => console.log(error)
+    );
+  }
 
-    });
+  private showFilteredLeaguesList(leagues: any) {
+    this.localState.leaguesListJson = leagues.json();
+
+    this.localState.leaguesList = this.localState.leaguesListJson
+      .filter( (obj) =>
+        obj.caption.toLowerCase().indexOf( this.localState.league.toLowerCase() ) !== -1 );
+
+    //this.appState.set('leaguesList', this.localState.leaguesList);
   }
 
 }
