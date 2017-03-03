@@ -25,9 +25,10 @@ import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { SearchLeagueStore } from './stores/search-league';
+import { TeamsStandingStore } from './stores/teams-standing';
 import { HomeComponent } from './home';
 import { SearchLeagueComponent } from './search-league';
-import { TopThreeStandingsComponent } from './top-three-standings';
+import { TeamsStandingComponent } from './teams-standing';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 
@@ -37,7 +38,8 @@ import '../styles/App.sass';
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
-  SearchLeagueStore
+  SearchLeagueStore,
+  TeamsStandingStore
 ];
 
 type StoreType = {
@@ -56,7 +58,7 @@ type StoreType = {
     AboutComponent,
     HomeComponent,
     SearchLeagueComponent,
-    TopThreeStandingsComponent,
+    TeamsStandingComponent,
     NoContentComponent
   ],
   imports: [ // import Angular's modules
@@ -74,8 +76,9 @@ export class AppModule {
 
   constructor(
     public appRef: ApplicationRef,
-    public appState: AppState
-    public searchLeagueStore: SearchLeagueStore
+    public appState: AppState,
+    public searchLeagueStore: SearchLeagueStore,
+    public teamsStandingStore: TeamsStandingStore
   ) {}
 
   public hmrOnInit(store: StoreType) {

@@ -1,0 +1,8 @@
+<div class="teams-standing__table">
+  <h2>{{leagueId}} - {{teams?._links?.competition?.href}}</h2>
+  <h3>{{teams?.leagueCaption}}</h3>
+  <div *ngFor="let team of teams?.standing">
+    {{team.teamName}}
+    {{team.crestURI}}
+  </div>
+</div>
