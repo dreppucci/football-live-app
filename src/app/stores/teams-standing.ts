@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer, Subject }  from 'rxjs/Rx';
+import { Subject }  from 'rxjs/Rx';
 
 @Injectable()
 export class TeamsStandingStore {

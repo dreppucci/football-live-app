@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer, Subject }  from 'rxjs/Rx';
-
-export type InternalStateType = {
-  [key: string]: any
-};
+import { Subject }  from 'rxjs/Rx';
 
 @Injectable()
 export class SearchLeagueStore {
 
-  public _state: InternalStateType = { };
   private filteredLeaguesList: Subject<any> = new Subject<any>();
   private updateFilteredLeaguesL: Subject<any> = new Subject<any>();
   private leagueSearching: string;

@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-
-import { AppState } from '../app.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'home',
@@ -11,6 +6,5 @@ import { AppState } from '../app.service';
 })
 export class HomeComponent {
   constructor(
-    public appState: AppState
   ) {}
 }
