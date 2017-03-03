@@ -24,6 +24,7 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
+import { SearchLeagueStore } from './stores/search-league';
 import { HomeComponent } from './home';
 import { SearchLeagueComponent } from './search-league';
 import { TopThreeStandingsComponent } from './top-three-standings';
@@ -35,7 +36,8 @@ import '../styles/App.sass';
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  SearchLeagueStore
 ];
 
 type StoreType = {
@@ -73,6 +75,7 @@ export class AppModule {
   constructor(
     public appRef: ApplicationRef,
     public appState: AppState
+    public searchLeagueStore: SearchLeagueStore
   ) {}
 
   public hmrOnInit(store: StoreType) {

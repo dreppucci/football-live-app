@@ -4,18 +4,24 @@ import { Http, Headers } from '@angular/http';
 @Injectable()
 export class HttpClient {
 
-  constructor(private http: Http) {}
+  private baseEndpoint: string;
+  private apiKey: string;
+
+  constructor(private http: Http) {
+    this.baseEndpoint = 'http://api.football-data.org/v1/';
+    this.apiKey = '5de3bb77944c4645811a6a3260b703fe';
+  }
 
   public get(url) {
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
-    return this.http.get(url, { headers });
+    return this.http.get(this.baseEndpoint + url, { headers });
   }
 
   public post(url, data) {
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
-    return this.http.post(url, data, { headers });
+    return this.http.post( this.baseEndpoint + url, data, { headers } );
   }
 
   private createAuthorizationHeader(headers: Headers) {

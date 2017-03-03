@@ -1,11 +1,11 @@
 import { Component, AfterViewInit, NgZone, ChangeDetectorRef,
-  ApplicationRef, ViewChild, ElementRef } from '@angular/core';
+  ApplicationRef, ViewChild, ElementRef, Input } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { AppState } from '../app.service';
-import { HttpClient } from '../shared/http-client';
+import { SearchLeagueStore } from '../stores/search-league';
+import { HttpClient } from '../services/http-client';
 
-import { Observable }  from 'rxjs/Observable';
+import { Observable, Observer, Subject }  from 'rxjs/Rx';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/observable/fromEvent';
@@ -17,12 +17,13 @@ import 'rxjs/add/observable/fromEvent';
 })
 export class SearchLeagueComponent implements AfterViewInit {
 
-  public localState = { league: '', leaguesListJson: null, leaguesList: [] };
-  @ViewChild('league') public inputElRef: ElementRef;
+  public localState: Object<any> = { leagueSearching: '' };
+  @Input() public filteredLeagues: Object;
+  @ViewChild('league') private inputElRef: ElementRef;
 
   constructor(
     public route: ActivatedRoute,
-    public appState: AppState,
+    public searchLeagueStore: SearchLeagueStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
     private appref: ApplicationRef,
@@ -36,35 +37,32 @@ export class SearchLeagueComponent implements AfterViewInit {
       Observable.fromEvent(this.inputElRef.nativeElement, 'keyup')
         .debounceTime(1000)
         .subscribe( (keyboardEvent: any) => {
-          this.localState.league = keyboardEvent.target.value;
+          this.localState.leagueSearching = keyboardEvent.target.value;
           this.cdref.detectChanges();
           this.getLeaguesList();
         });
-    });
-  }
 
-  public submitState(value: string) {
-    console.log('submitState', value);
-    this.appState.set('value', value);
-    this.localState.league = '';
+      this.searchLeagueStore.filteredLeaguesList
+        .subscribe( (data) => {
+          this.filteredLeagues = data;
+          this.cdref.detectChanges();
+        } );
+    });
+
   }
 
   private getLeaguesList() {
-    return this.http.get(`http://api.football-data.org/v1/competitions`)
+    return this.http.get('competitions')
     .subscribe(
       (data: any) => this.showFilteredLeaguesList(data),
       (error) => console.log(error)
     );
   }
 
-  private showFilteredLeaguesList(leagues: any) {
-    this.localState.leaguesListJson = leagues.json();
+  private showFilteredLeaguesList(leagues: any): Observable {
+    let leaguesListJson: Object = leagues.json();
 
-    this.localState.leaguesList = this.localState.leaguesListJson
-      .filter( (obj) =>
-        obj.caption.toLowerCase().indexOf( this.localState.league.toLowerCase() ) !== -1 );
-
-    //this.appState.set('leaguesList', this.localState.leaguesList);
+    this.searchLeagueStore.updateLeaguesList(leaguesListJson, this.localState.leagueSearching );
   }
 
 }

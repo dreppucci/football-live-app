@@ -6,7 +6,7 @@ export type InternalStateType = {
 };
 
 @Injectable()
-export class AppState {
+export class SearchLeagueStore {
 
   public _state: InternalStateType = { };
   private filteredLeaguesList: Subject<any> = new Subject<any>();
@@ -23,33 +23,9 @@ export class AppState {
       .subscribe(this.filteredLeaguesList);
   }
 
-  // already return a clone of the current state
-  public get state() {
-    return this._state = this._clone(this._state);
-  }
-  // never allow mutation
-  public set state(value) {
-    throw new Error('do not mutate the `.state` directly');
-  }
-
-  public get(prop?: any) {
-    // use our state getter for the clone
-    const state = this.state;
-    return state.hasOwnProperty(prop) ? state[prop] : state;
-  }
-
-  public set(prop: string, value: any) {
-    // internally mutate our state
-    return this._state[prop] = value;
-  }
-
   public updateLeaguesList(leaguesJson, leagueSearching) {
     this.leagueSearching = leagueSearching;
     this.updateFilteredLeaguesL.next(leaguesJson);
   }
 
-  private _clone(object: InternalStateType) {
-    // simple object clone
-    return JSON.parse(JSON.stringify( object ));
-  }
 }

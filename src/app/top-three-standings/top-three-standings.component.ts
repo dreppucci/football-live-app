@@ -1,49 +1,42 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import { Component, AfterViewInit, NgZone, ChangeDetectorRef,
+  ApplicationRef, ViewChild, ElementRef, Input } from '@angular/core';
+
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '../app.service';
+import { HttpClient } from '../services/http-client';
+
+import { Observable, Observer, Subject }  from 'rxjs/Rx';
 
 @Component({
   selector: 'top-three-standings',
+  providers: [HttpClient],
   templateUrl: '../templates/top-three-standings.html'
 })
-export class TopThreeStandingsComponent implements OnInit {
+export class TopThreeStandingsComponent implements AfterViewInit {
 
   public localState: any;
+
   constructor(
-    public route: ActivatedRoute
-  ) {}
-
-  public ngOnInit() {
-    this.route
-      .data
-      .subscribe((data: any) => {
-        // your resolved data from route
-        this.localState = data.yourData;
-      });
-
-    // console.log('hello `Top-three-standings` component');
-    // static data that is bundled
-    // var mockData = require('assets/mock-data/mock-data.json');
-    // console.log('mockData', mockData);
-    // if you're working with mock data you can also use http.get('assets/mock-data/mock-data.json')
-    // this.asyncDataWithWebpack();
+    public route: ActivatedRoute,
+    public appState: AppState,
+    private ngzone: NgZone,
+    private cdref: ChangeDetectorRef,
+    private appref: ApplicationRef,
+    private http: HttpClient
+  ) {
+    console.clear();
   }
-  private asyncDataWithWebpack() {
-    // you can also async load mock data with 'es6-promise-loader'
-    // you would do this if you don't want the mock-data bundled
-    // remember that 'es6-promise-loader' is a promise
-    setTimeout(() => {
 
-      System.import('../../assets/mock-data/mock-data.json')
-        .then((json) => {
-          console.log('async mockData', json);
-          this.localState = json;
-        });
+  public ngAfterViewInit () {
+    // DO STUFF
+  }
 
-    });
+  private getLeagueStanding() {
+    return this.http.get('competitions')
+    .subscribe(
+      (data: any) => console.log(data),
+      (error) => console.log(error)
+    );
   }
 
 }

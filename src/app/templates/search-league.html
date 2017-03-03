@@ -4,7 +4,7 @@
     <input
       name="league"
       #league
-      [value]="localState.league"
+      [value]="localState.leagueSearching"
       placeholder="Type league name"
       autofocus>
 
@@ -12,5 +12,10 @@
 </form>
 
 <ul>
-  <li *ngFor="let league of localState?.leaguesList">{{league.caption}}</li>
+  <li *ngFor="let league of filteredLeagues">
+    <a [routerLink]=" ['./league/'+league.league] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      {{league.caption}}
+    </a>
+  </li>
 </ul>
