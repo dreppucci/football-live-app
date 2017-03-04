@@ -2,7 +2,19 @@
   <h2>{{leagueId}} - {{teams?._links?.competition?.href}}</h2>
   <h3>{{teams?.leagueCaption}}</h3>
   <div *ngFor="let team of teams?.standing">
-    {{team.teamName}}
-    {{team.crestURI}}
+    <h4>
+		<a [routerLink]=" ['./league/'+leagueId+'/team/'+team.teamId] "
+	      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+	      {{team.teamName}}
+	    </a>
+    </h4>
+    <img [src]="team.crestURI" alt="{{team.teamName}}" title="{{team.teamName}}" />
+
+    <p>pts: {{team.points}}</p>
+    <p>goals: {{team.goals}}</p>
+    <p>played games: {{team.playedGames}}</p>
+    <p>wins: {{team.wins}}</p>
+    <p>draws: {{team.draws}}</p>
+    <p>losses: {{team.losses}}</p>
   </div>
 </div>
