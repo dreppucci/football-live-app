@@ -1,11 +1,11 @@
 import { Component, AfterViewInit, NgZone, ChangeDetectorRef,
-  ApplicationRef, ViewChild, ElementRef, Input } from '@angular/core';
+  ViewChild, ElementRef, Input } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { SearchLeagueStore } from '../stores/search-league';
 import { HttpClient } from '../services/http-client';
+import { Observable }  from 'rxjs/Rx';
 
-import { Observable, Observer, Subject }  from 'rxjs/Rx';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/observable/fromEvent';
@@ -26,7 +26,6 @@ export class SearchLeagueComponent implements AfterViewInit {
     public searchLeagueStore: SearchLeagueStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
-    private appref: ApplicationRef,
     private http: HttpClient
   ) {
     console.clear();
@@ -39,7 +38,7 @@ export class SearchLeagueComponent implements AfterViewInit {
         .subscribe( (keyboardEvent: any) => {
           this.localState.leagueSearching = keyboardEvent.target.value;
           this.cdref.detectChanges();
-          this.getLeaguesList();
+          this.filterLeaguesList();
         });
 
       this.searchLeagueStore.filteredLeaguesList
@@ -49,20 +48,16 @@ export class SearchLeagueComponent implements AfterViewInit {
         } );
     });
 
+    this.http.get('competitions')
+      .subscribe(
+        (data: any) => this.searchLeagueStore.saveLeaguesList(data.json()),
+        (error) => console.log(error)
+      );
+
   }
 
-  private getLeaguesList() {
-    return this.http.get('competitions')
-    .subscribe(
-      (data: any) => this.showFilteredLeaguesList(data),
-      (error) => console.log(error)
-    );
-  }
-
-  private showFilteredLeaguesList(leagues: any): Observable {
-    let leaguesListJson: Object = leagues.json();
-
-    this.searchLeagueStore.updateLeaguesList(leaguesListJson, this.localState.leagueSearching );
+  private filterLeaguesList() {
+    this.searchLeagueStore.updateLeaguesList( this.localState.leagueSearching );
   }
 
 }

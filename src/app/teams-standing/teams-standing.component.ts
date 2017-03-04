@@ -32,15 +32,14 @@ export class TeamsStandingComponent implements AfterViewInit {
         .subscribe( (data) => {
           this.teams = data;
           this.cdref.detectChanges();
-          console.log(this);
         } );
     });
 
-    this.http.get(`competitions/${this.leagueId}/leagueTable`)
+    /*this.http.get(`competitions/${this.leagueId}/leagueTable`)
       .subscribe(
         (data: any) => this.teamsStandingStore.showStandings(data.json()),
         (error) => console.log(error)
-      );
+      );*/
   }
 
 }
