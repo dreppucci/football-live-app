@@ -13,7 +13,7 @@ export class SearchLeagueStore {
   constructor() {
     this.saveLeaguesL
       .subscribe(
-        (data: object) => this.leaguesList = data,
+        (data: any) => this.leaguesList = data,
         (error) => console.log(error)
       );
 

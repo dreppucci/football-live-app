@@ -1,17 +1,19 @@
-<form action="javascript:void(0)" autocomplete="off">
+<form action="javascript:void(0)" autocomplete="off" class="search-league">
   <fieldset>
-
-    <input
-      name="league"
-      #league
-      [value]="localState.leagueSearching"
-      placeholder="Type league name"
-      autofocus>
+    
+    <div class="search-league__input-wrapper">
+      <input
+        name="league"
+        #league
+        [value]="localState.leagueSearching"
+        placeholder="Type league name"
+        autofocus>
+    </div>
 
   </fieldset>
 </form>
 
-<ul>
+<ul class="search-league__hints">
   <li *ngFor="let league of filteredLeagues">
     <a [routerLink]=" ['./league/'+league.league] "
       routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">

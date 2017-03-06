@@ -1,20 +1,33 @@
-<div class="teams-standing__table">
-  <h2>{{leagueId}} - {{teams?._links?.competition?.href}}</h2>
-  <h3>{{teams?.leagueCaption}}</h3>
-  <div *ngFor="let team of teams?.standing">
-    <h4>
-		<a [routerLink]=" ['./league/'+leagueId+'/team/'+team.teamId] "
-	      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-	      {{team.teamName}}
-	    </a>
-    </h4>
-    <img [src]="team.crestURI" alt="{{team.teamName}}" title="{{team.teamName}}" />
 
-    <p>pts: {{team.points}}</p>
-    <p>goals: {{team.goals}}</p>
-    <p>played games: {{team.playedGames}}</p>
-    <p>wins: {{team.wins}}</p>
-    <p>draws: {{team.draws}}</p>
-    <p>losses: {{team.losses}}</p>
+  <h3>{{teams?.leagueCaption}}</h3>
+  <header class="teams-standing__header">
+    <ul>
+      <li class="teams-standing__cell teams-standing__cell--position"> </li>
+      <li class="teams-standing__cell teams-standing__cell--empty"> </li>
+      <li class="teams-standing__cell teams-standing__cell--team">Team</li>
+      <li class="teams-standing__cell teams-standing__cell--pts">Pts</li>
+      <li class="teams-standing__cell teams-standing__cell--goals" *ngIf="fullData != false">Goals</li>
+      <li class="teams-standing__cell teams-standing__cell--played" *ngIf="fullData != false">Played games</li>
+      <li class="teams-standing__cell teams-standing__cell--wins" *ngIf="fullData != false">Wins</li>
+      <li class="teams-standing__cell teams-standing__cell--draws" *ngIf="fullData != false">Draws</li>
+      <li class="teams-standing__cell teams-standing__cell--losses" *ngIf="fullData != false">Losses</li>
+    </ul>
+  </header>
+  <div *ngFor="let team of teams?.standing" class="teams-standing__row">
+    <p class="teams-standing__position">{{team.position}}.</p>
+    <p class="teams-standing__image"><img [src]="team.crestURI" alt="{{team.teamName}}" title="{{team.teamName}}" /></p>
+    <p class="teams-standing__team">
+      <a [routerLink]=" ['./league/'+leagueId+'/team/'+team.teamId] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}" title="{{team.teamName}}">
+        {{team.teamName}}
+      </a>
+    </p>
+    <p class="teams-standing__points">{{team.points}}</p>
+    <div class="teams-standing__infos" *ngIf="fullData != false">
+      <p>{{team.goals}}</p>
+      <p>{{team.playedGames}}</p>
+      <p>{{team.wins}}</p>
+      <p>{{team.draws}}</p>
+      <p>{{team.losses}}</p>
+    </div>
   </div>
-</div>

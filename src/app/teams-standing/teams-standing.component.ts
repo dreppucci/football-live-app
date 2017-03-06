@@ -13,7 +13,8 @@ import { HttpClient } from '../services/http-client';
 export class TeamsStandingComponent implements AfterViewInit {
 
   @Input() private teams: Object;
-  @Input() private leagueId: string;
+  @Input('leagueId') private leagueId: string;
+  @Input('fullData') private fullData: string;
 
   constructor(
     public route: ActivatedRoute,

@@ -1,0 +1,64 @@
+search-league
+  display: block
+  @include clearfix()
+
+.search-league
+  text-align: center
+
+  fieldset
+    border: none
+
+  h2
+    text-align: center
+    @include font-size(18)
+    line-height: 1em
+    margin: 0 0 1em
+
+    @include bp-1024-landscape()
+      @include font-size(14)
+
+    @include bp-767()
+      @include font-size(12)
+
+  p
+    text-align: center
+    @include font-size(14)
+    line-height: 1.2em
+    margin: 0 0 2em
+
+    @include bp-1024-landscape()
+      @include font-size(10)
+
+    @include bp-767()
+      @include font-size(10)
+
+.search-league__input-wrapper
+  position: relative
+  @include css3-prefix('align-self', 'center')
+
+  input
+    border: 1px $color-global-darkliver solid
+    @include css3-prefix('border-radius', 0)
+    @include font-size(14)
+    line-height: 1em
+    color: $color-global-black
+    padding: .3em 10px
+    @include css3-prefix('appearance', 'none')
+
+    @include bp-1024-landscape()
+      @include font-size(10)
+      padding: 3px 10px 3px
+
+    @include bp-767()
+      @include font-size(10)
+      padding: 0 10px 0
+
+    &:focus
+      color: $color-global-black
+
+    &:focus + .search-league__input-info
+      @extend .is-placeholder-focused
+
+.search-league__hints
+  &:empty
+    display: none

@@ -1,0 +1,28 @@
+home
+  @include clearfix()
+  display: block
+
+  h1
+    @include font-size(24)
+    text-align: center
+    line-height: 1em
+
+  h2
+    @include font-size(20)
+    text-align: center
+    line-height: 1em
+
+  h3
+    @include font-size(18)
+    text-align: center
+    line-height: 1em
+
+  > p
+    @include font-size(16)
+    text-align: center
+    line-height: 1em
+
+.top-three-standings__wrapper
+  @include css3-prefix('display', 'flex')
+  @include css3-prefix('flex-direction', 'row')
+  @include css3-prefix('flex-wrap', 'wrap')

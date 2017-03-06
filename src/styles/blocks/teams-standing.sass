@@ -1,0 +1,98 @@
+.teams-standing__table
+  @include css3-prefix('flex', '0 0 30%')
+  padding: 0 1.5%
+
+  h3
+    @include font-size(10)
+    margin: 0 0 1em
+
+.teams-standing__header
+  padding: .5em 0
+  background: $color-global-violetblue
+
+  ul
+    display: block
+    @include css3-prefix('display', 'flex')
+    @include css3-prefix('flex-direction', 'row')
+    @include css3-prefix('flex-wrap', 'wrap')
+
+    li
+      font-weight: bold
+      @include font-size(9)
+      color: $color-global-white
+
+.teams-standing__cell
+  @include css3-prefix('flex', '0 0 10%')
+
+.teams-standing__cell--position
+  @include css3-prefix('flex', '0 0 5%')
+
+.teams-standing__cell--empty
+  @include css3-prefix('flex', '0 0 10%')
+
+.teams-standing__cell--team
+  @include css3-prefix('flex', '0 0 75%')
+
+.teams-standing__cell--pts
+  @include css3-prefix('flex', '0 0 10%')
+
+.teams-standing__cell--goals
+  @include css3-prefix('flex', '0 0 70%')
+
+.teams-standing__cell--wins
+  @include css3-prefix('flex', '0 0 70%')
+
+.teams-standing__cell--draws
+  @include css3-prefix('flex', '0 0 70%')
+
+.teams-standing__cell--losses
+  @include css3-prefix('flex', '0 0 70%')
+
+.teams-standing__cell--played
+  @include css3-prefix('flex', '0 0 70%')
+
+.teams-standing__row
+  background: $color-global-white
+  @include css3-prefix('display', 'flex')
+  @include css3-prefix('flex-direction', 'row')
+  @include css3-prefix('flex-wrap', 'wrap')
+  padding: .5em 0
+
+  &:nth-child(odd)
+    background: $color-global-light-violetblue
+
+.teams-standing__position
+  line-height: 30px
+  @include css3-prefix('flex', '0 0 5%')
+  margin: 0
+  text-align: right
+
+.teams-standing__image
+  @include css3-prefix('flex', '0 0 10%')
+  margin: 0
+
+  img
+    display: block
+    max-width: 30px
+    max-height: 30px
+    margin: 0 auto
+
+.teams-standing__team
+  font-weight: bold
+  line-height: 30px
+  @include css3-prefix('flex', '0 0 75%')
+  margin: 0
+
+  a
+    color: $color-global-violetblue
+    text-decoration: none
+    @include transition(color .5s $transition-easing-easeInOutCirc)
+
+    &:hover
+      text-decoration: none
+      color: $color-global-black
+
+.teams-standing__points
+  @include css3-prefix('flex', '0 0 10%')
+  line-height: 30px
+  margin: 0
