@@ -4,30 +4,55 @@ header.header__main
   top: 0
   left: 0
   right: 0
+  height: 60px
   z-index: 90
 
 .header__wrapper
   @include clearfix()
   @include css3-prefix('display', 'flex')
   @include css3-prefix('flew-flow', 'row nowrap')
-  @include css3-prefix('justify-content', 'center')
+  @include css3-prefix('justify-content', 'space-between')
+  height: 100%
+
+  nav
+    @include css3-prefix('align-self', 'center')
+
+    a
+      padding: 0 1em
+      @include font-size(10)
+      text-decoration: none
+      color: $color-global-white
+      @include transition(color .5s $transition-easing-easeInOutCirc)
+      cursor: pointer
+
+      &:hover
+        color: $color-global-violetblue
 
 .header__logo
-  width: 40px
-  @include css3-prefix('align-self', 'center')
-  margin-right: 1em
-  fill: $color-global-white
+  a
+    @include css3-prefix('display', 'flex')
+    @include css3-prefix('flew-flow', 'row nowrap')
+    @include css3-prefix('align-self', 'center')
+    text-decoration: none
+    height: 100%
 
-  @include bp-1024-landscape()
-    width: 30px
+  svg
+    width: 40px
+    height: 100%
+    fill: $color-global-white
+    margin-right: 1em
 
-  @include bp-767()
-    width: 30px
+    @include bp-1024-landscape()
+      width: 30px
+
+    @include bp-767()
+      width: 30px
 
 .header__title
   color: $color-global-white
   @include font-size(18)
   line-height: 1em
+  margin: 0
   @include css3-prefix('align-self', 'center')
 
   @include bp-1024-landscape()

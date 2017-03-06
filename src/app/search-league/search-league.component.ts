@@ -54,10 +54,24 @@ export class SearchLeagueComponent implements AfterViewInit {
         (error) => console.log(error)
       );
 
+    // this.asyncMockedData();
+
   }
 
   private filterLeaguesList() {
     this.searchLeagueStore.updateLeaguesList( this.localState.leagueSearching );
+  }
+
+  private asyncMockedData() {
+    setTimeout(() => {
+
+      System.import('../../assets/mock-data/competitions.json')
+        .then((data) => {
+          console.log('async mockData', data);
+          this.searchLeagueStore.saveLeaguesList(data)
+        });
+
+    });
   }
 
 }

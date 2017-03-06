@@ -8,16 +8,14 @@
         [value]="localState.leagueSearching"
         placeholder="Type league name"
         autofocus>
+
+      <ul class="search-league__hints"><li *ngFor="let league of filteredLeagues">
+          <a [routerLink]=" ['./league/'+league.league] "
+            routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+            {{league.caption}}
+          </a>
+        </li></ul>
     </div>
 
   </fieldset>
 </form>
-
-<ul class="search-league__hints">
-  <li *ngFor="let league of filteredLeagues">
-    <a [routerLink]=" ['./league/'+league.league] "
-      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-      {{league.caption}}
-    </a>
-  </li>
-</ul>

@@ -41,6 +41,20 @@ export class TeamsStandingComponent implements AfterViewInit {
         (data: any) => this.teamsStandingStore.showStandings(data.json()),
         (error) => console.log(error)
       );
+
+    // this.asyncMockedData();
+  }
+
+  private asyncMockedData() {
+    setTimeout(() => {
+
+      System.import('../../assets/mock-data/leagueTable.json')
+        .then((data) => {
+          console.log('async mockData', data);
+          this.teamsStandingStore.showStandings(data)
+        });
+
+    });
   }
 
 }

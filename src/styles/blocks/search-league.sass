@@ -34,9 +34,12 @@ search-league
 
 .search-league__input-wrapper
   position: relative
-  @include css3-prefix('align-self', 'center')
+  width: 300px
+  margin: 0 auto
+  z-index: 20
 
   input
+    width: 278px
     border: 1px $color-global-darkliver solid
     @include css3-prefix('border-radius', 0)
     @include font-size(14)
@@ -60,5 +63,37 @@ search-league
       @extend .is-placeholder-focused
 
 .search-league__hints
+  position: absolute
+  width: 100%
+  max-width: 298px
+  top: 42px
+  background: $color-global-white
+  border: 1px $color-global-darkliver solid
+  max-height: 100px
+  overflow: hidden
+  overflow-y: auto
+
   &:empty
     display: none
+    border: none
+
+  li
+    text-align: left
+
+    a
+      display: block
+      @include font-size(8)
+      line-height: 25px
+      padding: 0 10px
+      color: $color-global-violetblue
+      text-decoration: none
+      @include transition(color .5s $transition-easing-easeInOutCirc, background-color .5s $transition-easing-easeInOutCirc)
+      cursor: pointer
+
+      &:hover
+        text-decoration: none
+        color: $color-global-black
+        background: $color-global-lightliver
+
+    &:nth-child(odd)
+      background: $color-global-light-violetblue
