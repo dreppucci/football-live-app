@@ -71,7 +71,7 @@ export class SearchLeagueComponent implements AfterViewInit, OnDestroy {
       // this.asyncMockedData();
 
     } else {
-      this.searchLeagueStore.saveLeaguesList( this.appStore.get('leagues') );
+      this.saveLeaguesData( this.appStore.get('leagues') );
     }
   }
 
@@ -85,8 +85,7 @@ export class SearchLeagueComponent implements AfterViewInit, OnDestroy {
 
       System.import('../../assets/mock-data/competitions.json')
         .then((data) => {
-          this.searchLeagueStore.saveLeaguesList(data);
-          this.appStore.set('leagues', data);
+          this.saveLeaguesData( data );
         });
 
     });
