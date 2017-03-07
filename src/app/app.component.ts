@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
-import { AppState } from './app.service';
+import { AppStore } from './stores/app';
 
 /*
  * App Component
@@ -20,7 +20,7 @@ import { AppState } from './app.service';
 export class AppComponent implements OnInit {
 
   constructor(
-    public appState: AppState
+    public appState: AppStore
   ) {}
 
   public ngOnInit() {

@@ -68,7 +68,7 @@ export class SearchLeagueComponent implements AfterViewInit {
       System.import('../../assets/mock-data/competitions.json')
         .then((data) => {
           console.log('async mockData', data);
-          this.searchLeagueStore.saveLeaguesList(data)
+          this.searchLeagueStore.saveLeaguesList(data);
         });
 
     });

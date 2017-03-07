@@ -1,3 +1,4 @@
+/* TABLE */
 .teams-standing__table
   @include css3-prefix('flex', '0 0 30%')
   padding: 0 1.5%
@@ -6,6 +7,7 @@
     @include font-size(10)
     margin: 0 0 1em
 
+/* HEADER */
 .teams-standing__header
   padding: .5em 0
   background: $color-global-violetblue
@@ -21,55 +23,99 @@
       @include font-size(9)
       color: $color-global-white
 
-.teams-standing__cell
+.teams-standing__header-cell--goals,
+.teams-standing__header-cell--wins,
+.teams-standing__header-cell--draws,
+.teams-standing__header-cell--losses,
+.teams-standing__header-cell--played
+  display: none
+  text-align: center
+
+.teams-standing__header-cell
   @include css3-prefix('flex', '0 0 10%')
 
-.teams-standing__cell--position
+.teams-standing__header-cell--position
   @include css3-prefix('flex', '0 0 5%')
 
-.teams-standing__cell--empty
+.teams-standing__header-cell--empty
   @include css3-prefix('flex', '0 0 10%')
 
-.teams-standing__cell--team
+.teams-standing__header-cell--team
   @include css3-prefix('flex', '0 0 75%')
 
-.teams-standing__cell--pts
+.teams-standing__header-cell--pts
   @include css3-prefix('flex', '0 0 10%')
 
-.teams-standing__cell--goals
-  @include css3-prefix('flex', '0 0 70%')
+/* HEADER - FULL */
+.teams-standing__header--full
+  .teams-standing__header-cell--goals,
+  .teams-standing__header-cell--wins,
+  .teams-standing__header-cell--draws,
+  .teams-standing__header-cell--losses,
+  .teams-standing__header-cell--played
+    display: block
+    @include css3-prefix('flex', '0 0 8%')
 
-.teams-standing__cell--wins
-  @include css3-prefix('flex', '0 0 70%')
+  .teams-standing__header-cell--name
+    @include css3-prefix('flex', '0 0 40%')
+  .teams-standing__header-cell--pts
+    @include css3-prefix('flex', '0 0 5%')
 
-.teams-standing__cell--draws
-  @include css3-prefix('flex', '0 0 70%')
-
-.teams-standing__cell--losses
-  @include css3-prefix('flex', '0 0 70%')
-
-.teams-standing__cell--played
-  @include css3-prefix('flex', '0 0 70%')
-
+/* ROW */
 .teams-standing__row
   background: $color-global-white
-  @include css3-prefix('display', 'flex')
-  @include css3-prefix('flex-direction', 'row')
-  @include css3-prefix('flex-wrap', 'wrap')
-  padding: .5em 0
+  ul
+    display: block
+    @include css3-prefix('display', 'flex')
+    @include css3-prefix('flex-direction', 'row')
+    @include css3-prefix('flex-wrap', 'wrap')
+
+    li
+      @include font-size(9)
+      padding: .5em 0
+
+      &:nth-child(5n+0),
+      &:nth-child(7n+0),
+      &:nth-child(9n+0)
+        background: transparentize( lighten( $color-global-black, 90% ), .8)
+
+      &:nth-child(6n+0),
+      &:nth-child(8n+0)
+        background: transparentize( lighten( $color-global-black, 95% ), .4)
 
   &:nth-child(odd)
     background: $color-global-light-violetblue
 
-.teams-standing__position
-  line-height: 30px
-  @include css3-prefix('flex', '0 0 5%')
-  margin: 0
-  text-align: right
+    ul
+      li
+        &:nth-child(5n+0),
+        &:nth-child(7n+0),
+        &:nth-child(9n+0)
+          background: transparentize( $color-global-violetblue, .95)
 
-.teams-standing__image
-  @include css3-prefix('flex', '0 0 10%')
+        &:nth-child(6n+0),
+        &:nth-child(8n+0)
+          background: transparentize( $color-global-violetblue, .85)
+
+.teams-standing__row-cell--goals,
+.teams-standing__row-cell--wins,
+.teams-standing__row-cell--draws,
+.teams-standing__row-cell--losses,
+.teams-standing__row-cell--played
+  display: none
+  text-align: center
+
+.teams-standing__row-cell
+  line-height: 30px
   margin: 0
+  @include css3-prefix('flex', '0 0 10%')
+
+.teams-standing__row-cell--position
+  text-align: right
+  color: $color-global-black
+  @include css3-prefix('flex', '0 0 5%')
+
+.teams-standing__row-cell--image
 
   img
     display: block
@@ -77,11 +123,9 @@
     max-height: 30px
     margin: 0 auto
 
-.teams-standing__team
+.teams-standing__row-cell--name
   font-weight: bold
-  line-height: 30px
   @include css3-prefix('flex', '0 0 75%')
-  margin: 0
 
   a
     display: block
@@ -94,7 +138,17 @@
       text-decoration: none
       color: $color-global-black
 
-.teams-standing__points
-  @include css3-prefix('flex', '0 0 10%')
-  line-height: 30px
-  margin: 0
+/* ROW - FULL */
+.teams-standing__row--full
+  .teams-standing__row-cell--goals,
+  .teams-standing__row-cell--wins,
+  .teams-standing__row-cell--draws,
+  .teams-standing__row-cell--losses,
+  .teams-standing__row-cell--played
+    display: block
+    @include css3-prefix('flex', '0 0 8%')
+
+  .teams-standing__row-cell--name
+    @include css3-prefix('flex', '0 0 40%')
+  .teams-standing__row-cell--pts
+    @include css3-prefix('flex', '0 0 5%')

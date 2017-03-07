@@ -10,7 +10,7 @@
         autofocus>
 
       <ul class="search-league__hints"><li *ngFor="let league of filteredLeagues">
-          <a [routerLink]=" ['./league/'+league.league] "
+          <a [routerLink]=" ['./leagues/', league.id] "
             routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
             {{league.caption}}
           </a>

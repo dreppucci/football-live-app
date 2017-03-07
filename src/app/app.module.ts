@@ -23,12 +23,13 @@ import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, InternalStateType } from './app.service';
+import { AppStore, InternalStateType } from './stores/app';
 import { SearchLeagueStore } from './stores/search-league';
 import { TeamsStandingStore } from './stores/teams-standing';
 import { HomeComponent } from './home';
 import { SearchLeagueComponent } from './search-league';
 import { TeamsStandingComponent } from './teams-standing';
+import { LeaguesComponent, LeaguesDetailComponent } from './leagues';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 
@@ -37,7 +38,7 @@ import '../styles/App.sass';
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState,
+  AppStore,
   SearchLeagueStore,
   TeamsStandingStore
 ];
@@ -59,6 +60,8 @@ type StoreType = {
     HomeComponent,
     SearchLeagueComponent,
     TeamsStandingComponent,
+    LeaguesComponent,
+    LeaguesDetailComponent,
     NoContentComponent
   ],
   imports: [ // import Angular's modules
@@ -76,7 +79,7 @@ export class AppModule {
 
   constructor(
     public appRef: ApplicationRef,
-    public appState: AppState,
+    public appState: AppStore,
     public searchLeagueStore: SearchLeagueStore,
     public teamsStandingStore: TeamsStandingStore
   ) {}
