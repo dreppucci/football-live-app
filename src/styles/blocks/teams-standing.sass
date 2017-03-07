@@ -1,3 +1,15 @@
+.all-teams-standing__wrapper
+  @include css3-prefix('display', 'flex')
+  @include css3-prefix('flex-direction', 'row')
+  @include css3-prefix('flex-wrap', 'wrap')
+
+.all-teams-standing__body
+  @include css3-prefix('flex', '0 0 30%')
+  padding: 0 1.5%
+
+  &:empty
+    display: none
+
 /* TABLE */
 .teams-standing__table
   @include css3-prefix('flex', '0 0 30%')

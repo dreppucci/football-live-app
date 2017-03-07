@@ -13,16 +13,18 @@ export class TeamsStandingStore {
   }
 
   public showStandings(standings) {
-    standings.standing
-      .map( (team) => {
-        let teamLink = team._links.team.href,
-          teamLinkSplitted = teamLink.split('/teams/'),
-          teamId = teamLinkSplitted[1];
+    if( typeof standings.standing !== 'undefined' ) {
+        standings.standing
+        .map( (team) => {
+          let teamLink = team._links.team.href,
+            teamLinkSplitted = teamLink.split('/teams/'),
+            teamId = teamLinkSplitted[1];
 
-        return team.teamId = teamId;
-      } );
+          return team.teamId = teamId;
+        } );
 
-    this.showStands.next(standings);
+      this.showStands.next(standings);
+    }
   }
 
 }
