@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, NgZone, ChangeDetectorRef,
+import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef,
   ElementRef, Input } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import { HttpClient } from '../services/http-client';
   providers: [HttpClient],
   templateUrl: '../templates/leagues-detail.html'
 })
-export class LeaguesDetailComponent implements OnInit, AfterViewInit {
+export class LeaguesDetailComponent implements OnInit, OnDestroy {
 
   private id: string;
   private sub: any;
@@ -24,9 +24,8 @@ export class LeaguesDetailComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit () {
-    this.sub = this.route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe( (params) => {
       this.id = params.id;
-      // this.asyncMockedData();
     });
   }
 

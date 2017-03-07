@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, NgZone, ChangeDetectorRef,
+import { Component, OnDestroy, NgZone, ChangeDetectorRef,
   ElementRef, Input } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,10 @@ import { HttpClient } from '../services/http-client';
   providers: [HttpClient],
   templateUrl: '../templates/leagues.html'
 })
-export class LeaguesComponent implements AfterViewInit {
+export class LeaguesComponent implements OnDestroy {
+
+  private id: string;
+  private sub: any;
 
   constructor(
     public route: ActivatedRoute,
@@ -20,20 +23,7 @@ export class LeaguesComponent implements AfterViewInit {
     console.clear();
   }
 
-  public ngAfterViewInit () {
-    this.asyncMockedData();
-  }
-
-  private asyncMockedData() {
-    setTimeout(() => {
-
-      System.import('../../assets/mock-data/leagueTable.json')
-        .then((data) => {
-          console.log('async mockData', data);
-          // this.teamsStandingStore.showStandings(data);
-        });
-
-    });
+  public ngOnDestroy() {
   }
 
 }

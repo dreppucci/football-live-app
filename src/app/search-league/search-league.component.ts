@@ -1,7 +1,8 @@
-import { Component, AfterViewInit, NgZone, ChangeDetectorRef,
+import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef,
   ViewChild, ElementRef, Input } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
+import { AppStore } from '../stores/app';
 import { SearchLeagueStore } from '../stores/search-league';
 import { HttpClient } from '../services/http-client';
 import { Observable }  from 'rxjs/Rx';
@@ -15,7 +16,7 @@ import 'rxjs/add/observable/fromEvent';
   providers: [HttpClient],
   templateUrl: '../templates/search-league.html'
 })
-export class SearchLeagueComponent implements AfterViewInit {
+export class SearchLeagueComponent implements AfterViewInit, OnDestroy {
 
   public localState: Object<any> = { leagueSearching: '' };
   @Input() public filteredLeagues: Object;
@@ -23,6 +24,7 @@ export class SearchLeagueComponent implements AfterViewInit {
 
   constructor(
     public route: ActivatedRoute,
+    public appStore: AppStore,
     public searchLeagueStore: SearchLeagueStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
@@ -32,34 +34,50 @@ export class SearchLeagueComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit () {
-    this.ngzone.runOutsideAngular( () => {
-      Observable.fromEvent(this.inputElRef.nativeElement, 'keyup')
-        .debounceTime(1000)
-        .subscribe( (keyboardEvent: any) => {
-          this.localState.leagueSearching = keyboardEvent.target.value;
-          this.cdref.detectChanges();
-          this.filterLeaguesList();
-        });
+    Observable.fromEvent(this.inputElRef.nativeElement, 'keyup')
+      .debounceTime(1000)
+      .subscribe( (keyboardEvent: any) => {
+        this.localState.leagueSearching = keyboardEvent.target.value;
+        this.cdref.detectChanges();
+        this.filterLeaguesList();
+      });
 
-      this.searchLeagueStore.filteredLeaguesList
-        .subscribe( (data) => {
-          this.filteredLeagues = data;
-          this.cdref.detectChanges();
-        } );
-    });
+    this.searchLeagueStore.filteredLeaguesList
+      .subscribe( (data) => {
+        this.filteredLeagues = data;
+        this.cdref.detectChanges();
+      } );
 
-    this.http.get('competitions')
-      .subscribe(
-        (data: any) => this.searchLeagueStore.saveLeaguesList(data.json()),
-        (error) => console.log(error)
-      );
+    this.getLeaguesData();
 
-    // this.asyncMockedData();
+  }
 
+  public ngOnDestroy () {
+    this.cdref.detach();
   }
 
   private filterLeaguesList() {
     this.searchLeagueStore.updateLeaguesList( this.localState.leagueSearching );
+  }
+
+  private getLeaguesData() {
+    if( this.appStore.get('leagues') === undefined ) {
+      this.http.get('competitions')
+        .subscribe(
+          (data: any) => this.saveLeaguesData(data.json()),
+          (error) => console.log(error)
+      );
+
+      // this.asyncMockedData();
+
+    } else {
+      this.searchLeagueStore.saveLeaguesList( this.appStore.get('leagues') );
+    }
+  }
+
+  private saveLeaguesData(data: Object) {
+    this.searchLeagueStore.saveLeaguesList(data);
+    this.appStore.set('leagues', data);
   }
 
   private asyncMockedData() {
@@ -67,8 +85,8 @@ export class SearchLeagueComponent implements AfterViewInit {
 
       System.import('../../assets/mock-data/competitions.json')
         .then((data) => {
-          console.log('async mockData', data);
           this.searchLeagueStore.saveLeaguesList(data);
+          this.appStore.set('leagues', data);
         });
 
     });

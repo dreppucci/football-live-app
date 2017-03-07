@@ -50,7 +50,6 @@ export class TeamsStandingComponent implements AfterViewInit {
 
       System.import('../../assets/mock-data/leagueTable.json')
         .then((data) => {
-          console.log('async mockData', data);
           this.teamsStandingStore.showStandings(data);
         });
 

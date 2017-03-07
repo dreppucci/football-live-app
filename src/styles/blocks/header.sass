@@ -25,8 +25,12 @@ header.header__main
       @include transition(color .5s $transition-easing-easeInOutCirc)
       cursor: pointer
 
-      &:hover
-        color: $color-global-violetblue
+      &:hover,
+      &.active
+        color: darken($color-global-green, 30%)
+
+      &.active
+        cursor: default
 
 .header__logo
   a

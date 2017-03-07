@@ -7,6 +7,20 @@
     @include font-size(10)
     margin: 0 0 1em
 
+    a
+      display: block
+      color: $color-global-violetblue
+      text-decoration: none
+      @include transition(color .5s $transition-easing-easeInOutCirc)
+      cursor: pointer
+
+      &:hover,
+      &.active
+        text-decoration: none
+        color: $color-global-black
+      &.active
+        cursor: default
+
 /* HEADER */
 .teams-standing__header
   padding: .5em 0
@@ -33,6 +47,7 @@
 
 .teams-standing__header-cell
   @include css3-prefix('flex', '0 0 10%')
+  @include css3-prefix('align-self', 'center')
 
 .teams-standing__header-cell--position
   @include css3-prefix('flex', '0 0 5%')
@@ -41,7 +56,7 @@
   @include css3-prefix('flex', '0 0 10%')
 
 .teams-standing__header-cell--team
-  @include css3-prefix('flex', '0 0 75%')
+  @include css3-prefix('flex', '0 0 74%')
 
 .teams-standing__header-cell--pts
   @include css3-prefix('flex', '0 0 10%')
@@ -125,7 +140,7 @@
 
 .teams-standing__row-cell--name
   font-weight: bold
-  @include css3-prefix('flex', '0 0 75%')
+  @include css3-prefix('flex', '0 0 74%')
 
   a
     display: block
