@@ -28,6 +28,7 @@
     "clean:build": "npm run rimraf -- build",
     "clean:install": "npm set progress=false && npm install",
     "clean": "npm cache clean && npm run rimraf -- node_modules doc coverage build compiled dll",
+    "deploy": "npm run build&&gh-pages -d build",
     "docker": "docker",
     "docs": "npm run typedoc -- --options typedoc.json --exclude '**/*.spec.ts' ./src/",
     "e2e:live": "npm-run-all -p -r server:prod:ci protractor:live",
