@@ -53,7 +53,7 @@
     "server": "npm run server:dev",
     "start:hmr": "npm run server:dev:hmr",
     "start": "npm run server:dev",
-    "test": "npm run lint && karma start",
+    "test": "npm run lint",
     "tslint": "./node_modules/tslint/bin/tslint",
     "typedoc": "typedoc",
     "version": "npm run build",

@@ -16,8 +16,8 @@ Error.stackTraceLimit = Infinity;
 require('core-js/es6');
 require('core-js/es7/reflect');
 
-require('zone.js/build/zone');
-require('zone.js/build/long-stack-trace-zone');
+require('./node_modules/zone.js/build/zone');
+require('./node_modules/zone.js/build/long-stack-trace-zone');
 require('zone.js/build/proxy'); // since zone.js 0.6.15
 require('zone.js/build/sync-test');
 require('zone.js/build/jasmine-patch'); // put here since zone.js 0.6.14
