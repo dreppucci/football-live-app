@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home';
 import { LeaguesComponent, LeaguesDetailComponent } from './leagues';
+import { TeamsDetailComponent } from './teams';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 
@@ -12,5 +13,6 @@ export const ROUTES: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'leagues', component: LeaguesComponent },
   { path: 'leagues/:id', component: LeaguesDetailComponent },
+  { path: 'teams/:id', component: TeamsDetailComponent },
   { path: '**',    component: NoContentComponent },
 ];

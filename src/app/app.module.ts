@@ -30,6 +30,7 @@ import { HomeComponent } from './home';
 import { SearchLeagueComponent } from './search-league';
 import { TeamsStandingComponent } from './teams-standing';
 import { LeaguesComponent, LeaguesDetailComponent } from './leagues';
+import { TeamsDetailComponent } from './teams';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 
@@ -60,6 +61,7 @@ type StoreType = {
     HomeComponent,
     SearchLeagueComponent,
     TeamsStandingComponent,
+    TeamsDetailComponent,
     LeaguesComponent,
     LeaguesDetailComponent,
     NoContentComponent
