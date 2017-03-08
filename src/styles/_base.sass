@@ -36,13 +36,63 @@ app
   line-height: 1.3em
 
 main
-  padding-top: 70px
+  padding-top: 90px
+
+  h1
+    @include font-size(24)
+    text-align: center
+    line-height: 1em
+    margin: 0 0 1em
+
+  h2
+    @include font-size(20)
+    text-align: center
+    line-height: 1em
+    margin: 0 0 1em
+
+  h3
+    @include font-size(18)
+    text-align: center
+    line-height: 1em
+    margin: 0 0 1em
 
 home,
 leagues,
 leagues-detail
   @include clearfix()
   display: block
+
+.btn-back
+  margin: 0 0 1em 1em
+  display: inline
+  float: left
+
+  a
+    display: block
+    @include font-size(10)
+    text-decoration: none
+    color: $color-global-black
+    @include transition(color .5s $transition-easing-easeInOutCirc)
+    cursor: pointer
+
+    svg
+      width: 16px
+      height: 16px
+      fill: $color-global-green
+      display: inline
+      float: left
+      margin: 0 .5em 0 0
+      @include transition(fill .5s $transition-easing-easeInOutCirc)
+
+    span
+      display: inline
+      float: left
+
+    &:hover
+      color: $color-global-violetblue
+
+      svg
+        fill: $color-global-violetblue
 
 .is-visible
   display: block;
