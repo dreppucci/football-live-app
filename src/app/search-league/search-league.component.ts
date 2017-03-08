@@ -18,7 +18,7 @@ import 'rxjs/add/observable/fromEvent';
 })
 export class SearchLeagueComponent implements AfterViewInit, OnDestroy {
 
-  public localState: Object<any> = { leagueSearching: '' };
+  public localState: any = { leagueSearching: '' };
   @Input() public filteredLeagues: Object;
   @ViewChild('league') private inputElRef: ElementRef;
 
@@ -61,8 +61,8 @@ export class SearchLeagueComponent implements AfterViewInit, OnDestroy {
   }
 
   private getLeaguesData() {
-    if( this.appStore.get('leagues') === undefined ) {
-      this.http.get('competitions')
+    if ( this.appStore.get( 'leagues' ) === undefined ) {
+      this.http.get( 'competitions' )
         .subscribe(
           (data: any) => this.saveLeaguesData(data.json()),
           (error) => console.log(error)

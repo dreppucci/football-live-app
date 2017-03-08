@@ -4,8 +4,8 @@ import { Subject }  from 'rxjs/Rx';
 @Injectable()
 export class SearchLeagueStore {
 
+  public filteredLeaguesList: Subject<any> = new Subject<any>();
   private leaguesList: Subject<any> = new Subject<any>();
-  private filteredLeaguesList: Subject<any> = new Subject<any>();
   private saveLeaguesL: Subject<any> = new Subject<any>();
   private updateFilteredLeaguesL: Subject<any> = new Subject<any>();
   private leagueSearching: string;

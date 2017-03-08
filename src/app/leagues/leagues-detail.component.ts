@@ -11,7 +11,7 @@ import { HttpClient } from '../services/http-client';
 })
 export class LeaguesDetailComponent implements OnInit, OnDestroy {
 
-  private id: string;
+  public id: string;
   private sub: any;
 
   constructor(
@@ -24,7 +24,7 @@ export class LeaguesDetailComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit () {
-    this.sub = this.route.params.subscribe( (params) => {
+    this.sub = this.route.params.subscribe( (params: any) => {
       this.id = params.id;
     });
   }

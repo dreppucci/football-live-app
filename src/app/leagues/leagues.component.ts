@@ -12,7 +12,7 @@ import { HttpClient } from '../services/http-client';
 })
 export class LeaguesComponent implements OnInit, OnDestroy {
 
-  @Input() public leagues: Array<any> = [];
+  @Input() public leagues: any[] = [];
 
   constructor(
     public route: ActivatedRoute,
@@ -33,7 +33,7 @@ export class LeaguesComponent implements OnInit, OnDestroy {
   }
 
   private getLeaguesData() {
-    if( this.appStore.get('leagues') === undefined ) {
+    if ( this.appStore.get('leagues') === undefined ) {
       /*this.http.get('competitions')
         .subscribe(
           (data: any) => this.saveLeaguesData(data.json()),
