@@ -1,11 +1,12 @@
 {
-  "main": {
-    "js": "main.bundle.js"
-  },
   "vendor": {
-    "js": "vendor.bundle.js"
+    "js": "/football-live-app/vendor.43007fdd24d34d951c2f.bundle.js"
+  },
+  "main": {
+    "js": "/football-live-app/main.da699198eccdfa13c754.bundle.js",
+    "css": "/football-live-app/main.cb87a52af91b913bc4c8e601f28dc15b.css"
   },
   "polyfills": {
-    "js": "polyfills.bundle.js"
+    "js": "/football-live-app/polyfills.fd21909e6c833e2779e3.bundle.js"
   }
 }

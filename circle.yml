@@ -34,4 +34,4 @@ deployment:
   production:
     branch: [master, /feature_.*/]
     commands:
-      - ./scripts/deploy-ghpages.sh
+      - npm run deploy

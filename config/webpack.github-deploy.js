@@ -10,11 +10,12 @@ const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 /**
  * Webpack Constants
  */
-const GIT_REMOTE_NAME = 'origin';
+const GIT_REMOTE_NAME = 'https://github.com/dreppucci/football-live-app.git';
 const COMMIT_MESSAGE = 'Updates';
 const GH_REPO_NAME = ghDeploy.getRepoName(GIT_REMOTE_NAME);
 
 module.exports = function (options) {
+
   const webpackConfigFactory = ghDeploy.getWebpackConfigModule(options); // the settings that are common to prod and dev
   const webpackConfig = webpackConfigFactory(options);
 
@@ -62,9 +63,11 @@ module.exports = function (options) {
          fs.writeFileSync(path.join(webpackConfig.output.path, '.nojekyll'), '');
 
          const ghpages = require('gh-pages');
+
          ghpages.publish(webpackConfig.output.path, options, function(err) {
            if (err) {
              console.log('GitHub deployment done. STATUS: ERROR.');
+             console.log(err);
              throw err;
            } else {
              console.log('GitHub deployment done. STATUS: SUCCESS.');
