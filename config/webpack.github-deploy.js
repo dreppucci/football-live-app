@@ -10,9 +10,10 @@ const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 /**
  * Webpack Constants
  */
-const GIT_REMOTE_NAME = 'https://github.com/dreppucci/football-live-app.git';
-const COMMIT_MESSAGE = 'Updates';
-const GH_REPO_NAME = ghDeploy.getRepoName(GIT_REMOTE_NAME);
+const GIT_REMOTE_NAME = 'origin';
+const GIT_REPO = 'https://github.com/dreppucci/football-live-app.git';
+const COMMIT_MESSAGE = 'Deployment on github pages';
+const GH_REPO_NAME = ghDeploy.getRepoName(GIT_REPO);
 
 module.exports = function (options) {
 
@@ -53,6 +54,7 @@ module.exports = function (options) {
            logger: logger,
            remote: GIT_REMOTE_NAME,
            message: COMMIT_MESSAGE,
+           repo: GIT_REPO,
            dotfiles: true // for .nojekyll
          };
 

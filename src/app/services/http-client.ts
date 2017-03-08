@@ -8,7 +8,7 @@ export class HttpClient {
   private apiKey: string;
 
   constructor(private http: Http) {
-    this.baseEndpoint = 'http://api.football-data.org/v1/';
+    this.baseEndpoint = 'https://api.football-data.org/v1/';
     this.apiKey = '5de3bb77944c4645811a6a3260b703fe';
   }
 
