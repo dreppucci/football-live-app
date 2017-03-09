@@ -25,7 +25,7 @@ import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppStore, InternalStateType } from './stores/app';
 import { SearchLeagueStore } from './stores/search-league';
-import { TeamsStandingStore } from './stores/teams-standing';
+import { TeamsStore } from './stores/teams';
 import { HomeComponent } from './home';
 import { SearchLeagueComponent } from './search-league';
 import { TeamsStandingComponent } from './teams-standing';
@@ -41,7 +41,7 @@ const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppStore,
   SearchLeagueStore,
-  TeamsStandingStore
+  TeamsStore
 ];
 
 type StoreType = {
@@ -83,7 +83,7 @@ export class AppModule {
     public appRef: ApplicationRef,
     public appState: AppStore,
     public searchLeagueStore: SearchLeagueStore,
-    public teamsStandingStore: TeamsStandingStore
+    public teamsStore: TeamsStore
   ) {}
 
   public hmrOnInit(store: StoreType) {

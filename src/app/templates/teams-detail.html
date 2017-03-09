@@ -4,4 +4,7 @@
     <span>Back</span>
   </a>
 </p>
-<p>team id: {{id}}</p>
+
+<teams-detail-global [teamId]="id"></teams-detail-global>
+<teams-detail-players [teamId]="id"></teams-detail-players>
+<teams-detail-fixtures [teamId]="id"></teams-detail-fixtures>

@@ -2,12 +2,12 @@ import { Component, OnInit, AfterViewInit, NgZone, ChangeDetectorRef,
   ElementRef, Input } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { TeamsStandingStore } from '../stores/teams-standing';
+import { TeamsStore } from '../stores/teams';
 import { HttpClient } from '../services/http-client';
 
 @Component({
   selector: 'teams-standing',
-  providers: [HttpClient, TeamsStandingStore],
+  providers: [HttpClient, TeamsStore],
   templateUrl: '../templates/teams-standing.html'
 })
 export class TeamsStandingComponent implements AfterViewInit {
@@ -18,7 +18,7 @@ export class TeamsStandingComponent implements AfterViewInit {
 
   constructor(
     public route: ActivatedRoute,
-    private teamsStandingStore: TeamsStandingStore,
+    private teamsStore: TeamsStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
     private http: HttpClient
@@ -29,7 +29,7 @@ export class TeamsStandingComponent implements AfterViewInit {
   public ngAfterViewInit () {
     this.ngzone.runOutsideAngular( () => {
 
-      this.teamsStandingStore.standings
+      this.teamsStore.standings
         .subscribe( (data) => {
           this.teams = data;
           this.cdref.detectChanges();
@@ -38,7 +38,7 @@ export class TeamsStandingComponent implements AfterViewInit {
 
     this.http.get(`competitions/${this.leagueId}/leagueTable`)
       .subscribe(
-        (data: any) => this.teamsStandingStore.showStandings(data.json()),
+        (data: any) => this.teamsStore.showStandings(data.json()),
         (error) => console.log(error)
       );
 
@@ -50,7 +50,7 @@ export class TeamsStandingComponent implements AfterViewInit {
 
       System.import('../../assets/mock-data/leagueTable.json')
         .then((data) => {
-          this.teamsStandingStore.showStandings(data);
+          this.teamsStore.showStandings(data);
         });
 
     });

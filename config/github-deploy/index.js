@@ -23,6 +23,9 @@ function getRepoName(remoteName) {
   var stdout = execSync('git remote show ' + remoteName),
       match = REPO_NAME_RE.exec(stdout);
 
+  console.log('debug', stdout);
+  console.log('debug', math);
+
   if (!match) {
     throw new Error('Could not find a repository on remote ' + remoteName);
   } else {
