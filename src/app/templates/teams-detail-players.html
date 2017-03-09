@@ -1,0 +1,13 @@
+players
+<div *ngIf="data">count: {{data?.count}}</div>
+<ul *ngIf="data">
+  <li *ngFor="let player of data?.players">
+    {{player.name}}
+    {{player.position}}
+    {{player.jerseyNumber}}
+    {{player.dateOfBirth}}
+    {{player.nationality}}
+    {{player.contractUntil}}
+    {{player.marketValue}}
+  </li>
+</ul>

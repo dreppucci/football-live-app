@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, NgZone, ChangeDetectorRef,
+import { Component, AfterViewInit, NgZone, ChangeDetectorRef,
   ElementRef, Input } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';

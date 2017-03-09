@@ -1,0 +1,18 @@
+fixtures
+<div *ngIf="data">count: {{data?.count}}</div>
+<ul *ngIf="data">
+  <li *ngFor="let fixture of data?.fixtures">
+    {{fixture.date}}
+    {{fixture.status}}
+    {{fixture.matchday}}
+    {{fixture.homeTeamName}}{{fixture.result?.goalsHomeTeam}}
+    {{fixture.awayTeamName}}{{fixture.result?.goalsAwayTeam}}
+    
+    <div *ngIf="fixture.odds">
+    odds
+    homeWin: {{fixture.odds.homeWin}}
+    draws: {{fixture.odds.draws}}
+    awayWin: {{fixture.odds.awayWin}}
+    </div>
+  </li>
+</ul>

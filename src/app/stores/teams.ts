@@ -16,6 +16,16 @@ export class TeamsStore {
   constructor() {
     this.showStands
       .subscribe(this.standings);
+
+    this.showGlob
+      .subscribe(this.teamInfo);
+
+    this.showFixs
+      .subscribe(this.teamFixtures);
+
+    this.showPlays
+      .subscribe(this.teamPlayers);
+
   }
 
   public showStandings(standings) {
@@ -38,11 +48,11 @@ export class TeamsStore {
   }
 
   public showFixtures(fixtures) {
-    if ( fixtures.hasOwnProperty('name') ) this.showFixs.next(fixtures);
+    if ( fixtures.hasOwnProperty('fixtures') ) this.showFixs.next(fixtures);
   }
 
   public showPlayers(players) {
-    if ( players.hasOwnProperty('name') ) this.showPlays.next(players);
+    if ( players.hasOwnProperty('players') ) this.showPlays.next(players);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef,
+import { Component, AfterViewInit, NgZone, ChangeDetectorRef,
   ElementRef, Input } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
@@ -10,10 +10,10 @@ import { HttpClient } from '../services/http-client';
   providers: [HttpClient, TeamsStore],
   templateUrl: '../templates/teams-detail-fixtures.html'
 })
-export class TeamsDetailFixturesComponent implements OnInit, OnDestroy {
+export class TeamsDetailFixturesComponent implements AfterViewInit {
 
-  public id: string;
-  private sub: any;
+  @Input() public data: Object;
+  @Input('teamId') private teamId: string;
 
   constructor(
     public route: ActivatedRoute,
@@ -25,22 +25,27 @@ export class TeamsDetailFixturesComponent implements OnInit, OnDestroy {
     console.clear();
   }
 
-  public ngOnInit () {
-    this.sub = this.route.params.subscribe( (params: any) => {
-      this.id = params.id;
+  public ngAfterViewInit () {
+    this.subscribeToStoreProperty();
 
-      /*this.http.get(`teams/${this.id}/fixtures`)
-        .subscribe(
-          (data: any) => this.teamsStore.showStandings(data.json()),
-          (error) => console.log(error)
-        );*/
-
-      this.asyncMockedData();
-    });
+    // this.getData();
+    this.asyncMockedData();
   }
 
-  public ngOnDestroy() {
-    this.sub.unsubscribe();
+  private subscribeToStoreProperty() {
+    this.teamsStore.teamFixtures
+      .subscribe( (data) => {
+        this.data = data;
+        this.cdref.detectChanges();
+      } );
+  }
+
+  private getData() {
+    this.http.get(`teams/${this.teamId}/fixtures`)
+      .subscribe(
+        (data: any) => this.teamsStore.showFixtures(data.json()),
+        (error) => console.log(error)
+      );
   }
 
   private asyncMockedData() {
@@ -52,6 +57,11 @@ export class TeamsDetailFixturesComponent implements OnInit, OnDestroy {
         });
 
     });
+  }
+
+  private unsubscribeToStoreProperty() {
+    this.teamsStore.teamFixtures
+      .unsubscribe();
   }
 
 }
