@@ -52,7 +52,16 @@ export class TeamsStore {
   }
 
   public showPlayers(players) {
-    if ( players.hasOwnProperty('players') ) this.showPlays.next(players);
+    if ( players.hasOwnProperty('players') ) {
+      players.players
+        .map( (player) => {
+          let birthday = player.dateOfBirth.split('-');
+          let birtdayDate = new Date( birthday[0], birthday[1]-1, birthday[2] );
+
+          return player.birthdayDate = birtdayDate;
+        } );
+      this.showPlays.next(players);
+    }
   }
 
 }

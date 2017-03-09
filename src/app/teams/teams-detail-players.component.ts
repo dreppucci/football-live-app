@@ -4,10 +4,12 @@ import { Component, AfterViewInit, NgZone, ChangeDetectorRef,
 import { ActivatedRoute } from '@angular/router';
 import { TeamsStore } from '../stores/teams';
 import { HttpClient } from '../services/http-client';
+import { OrderBy } from '../services/orderBy';
 
 @Component({
   selector: 'teams-detail-players',
   providers: [HttpClient, TeamsStore],
+  pipes: [OrderBy],
   templateUrl: '../templates/teams-detail-players.html'
 })
 export class TeamsDetailPlayersComponent implements AfterViewInit {

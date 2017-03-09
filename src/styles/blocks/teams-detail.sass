@@ -1,0 +1,40 @@
+.team-detail
+  @include clearfix()
+  @include css3-prefix('display', 'flex')
+  @include css3-prefix('flex-wrap', 'wrap')
+
+teams-detail-global
+  @include clearfix()
+  @include css3-prefix('display', 'flex')
+  margin: 0 0 3em
+  
+  figure
+    @include css3-prefix('flex', '0 0 6%')
+    margin: 0 5%
+
+    img
+      display: block
+      width: 100%
+      min-width: 76px
+
+  .team-detail__infos
+    @include css3-prefix('flex', '0 0 auto')
+
+    h4
+      @include font-size(16)
+      line-height: 1em
+      margin: 0 0 .2em
+    h5
+      @include font-size(9)
+      color: $color-global-darkliver
+      line-height: 1em
+      margin: 0 0 1em
+
+.teams-details__info-marketvalue
+  @include font-size(10)
+  line-height: 1em
+  margin: 0 0 .2em
+
+teams-detail-players,
+teams-detail-fixtures
+  @include css3-prefix('flex', '0 0 50%')

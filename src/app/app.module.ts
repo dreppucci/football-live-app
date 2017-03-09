@@ -34,6 +34,7 @@ import { TeamsDetailComponent, TeamsDetailGlobalComponent,
   TeamsDetailFixturesComponent, TeamsDetailPlayersComponent } from './teams';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
+import { OrderBy } from './services/orderBy';
 
 import '../styles/App.sass';
 
@@ -68,7 +69,8 @@ type StoreType = {
     TeamsDetailPlayersComponent,
     LeaguesComponent,
     LeaguesDetailComponent,
-    NoContentComponent
+    NoContentComponent,
+    OrderBy
   ],
   imports: [ // import Angular's modules
     BrowserModule,
