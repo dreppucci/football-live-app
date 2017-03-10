@@ -9,7 +9,6 @@ import { OrderBy } from '../services/orderBy';
 @Component({
   selector: 'teams-detail-players',
   providers: [HttpClient, TeamsStore],
-  pipes: [OrderBy],
   templateUrl: '../templates/teams-detail-players.html'
 })
 export class TeamsDetailPlayersComponent implements AfterViewInit {

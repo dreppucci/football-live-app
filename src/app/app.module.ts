@@ -26,6 +26,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppStore, InternalStateType } from './stores/app';
 import { SearchLeagueStore } from './stores/search-league';
 import { TeamsStore } from './stores/teams';
+import { NationalityEncoder } from './services/nationalityEncoder';
 import { HomeComponent } from './home';
 import { SearchLeagueComponent } from './search-league';
 import { TeamsStandingComponent } from './teams-standing';
@@ -34,7 +35,6 @@ import { TeamsDetailComponent, TeamsDetailGlobalComponent,
   TeamsDetailFixturesComponent, TeamsDetailPlayersComponent } from './teams';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
-import { OrderBy } from './services/orderBy';
 
 import '../styles/App.sass';
 
@@ -43,7 +43,8 @@ const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppStore,
   SearchLeagueStore,
-  TeamsStore
+  TeamsStore,
+  NationalityEncoder
 ];
 
 type StoreType = {
@@ -69,8 +70,7 @@ type StoreType = {
     TeamsDetailPlayersComponent,
     LeaguesComponent,
     LeaguesDetailComponent,
-    NoContentComponent,
-    OrderBy
+    NoContentComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,

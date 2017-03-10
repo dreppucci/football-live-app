@@ -1,12 +1,12 @@
 <h4>The team</h4>
 <div *ngIf="data">count: {{data?.count}}</div>
 <ul *ngIf="data">
-  <li *ngFor="let player of data?.players | orderBy : ['-position', 'jerseyNumber']">
+  <li *ngFor="let player of data.players">
     {{player.name}}<br />
     {{player.position}}<br />
     {{player.jerseyNumber}}<br />
     {{player.birthdayDate | date:"dd/MM/yyyy" }}<br />
-    {{player.nationality}}<br />
+    <span class="flag-icon flag-icon-{{player.nationCode}}"></span>{{player.nationality}}<br />
     {{player.contractUntil}}<br />
     {{player.marketValue}}<br /><br /><br />
   </li>
