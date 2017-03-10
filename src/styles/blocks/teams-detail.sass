@@ -1,11 +1,12 @@
 .team-detail
   @include clearfix()
-  @include css3-prefix('display', 'flex')
-  @include css3-prefix('flex-wrap', 'wrap')
+  //@include css3-prefix('display', 'flex')
+  //@include css3-prefix('flex-wrap', 'wrap')
 
 teams-detail-global
   @include clearfix()
   @include css3-prefix('display', 'flex')
+  @include css3-prefix('justify-content', 'center')
   margin: 0 0 3em
   
   figure
@@ -19,7 +20,6 @@ teams-detail-global
 
   .team-detail__infos
     @include css3-prefix('flex', '0 0 auto')
-    min-width: 700px
 
     h4
       @include font-size(16)
@@ -38,4 +38,83 @@ teams-detail-global
 
 teams-detail-players,
 teams-detail-fixtures
-  @include css3-prefix('flex', '0 0 50%')
+  // @include css3-prefix('flex', '0 0 50%')
+
+teams-detail-players
+  h4
+    @include font-size(14)
+    line-height: 1em
+    margin: 0 0 1em
+    text-align: center
+
+  ul
+    display: block
+
+    li
+      @include css3-prefix('display', 'flex')
+      @include css3-prefix('flex-direction', 'row')
+      @include css3-prefix('flex-wrap', 'wrap')
+
+.player__header
+  background: $color-global-violetblue
+  padding: .5em 0
+
+  span
+    color: $color-global-white
+    font-weight: bold
+
+.player__row
+  background: $color-global-white
+
+  span
+    padding: .5em 0
+
+    &:nth-child(5n+0),
+    &:nth-child(7n+0),
+    &:nth-child(9n+0)
+      background: transparentize( lighten( $color-global-black, 90% ), .8)
+
+    &:nth-child(6n+0),
+    &:nth-child(8n+0)
+      background: transparentize( lighten( $color-global-black, 95% ), .4)
+
+  &:nth-child(odd)
+    background: $color-global-light-violetblue
+
+    span
+      &:nth-child(5n+0),
+      &:nth-child(7n+0),
+      &:nth-child(9n+0)
+        background: transparentize( $color-global-violetblue, .95)
+
+      &:nth-child(6n+0),
+      &:nth-child(8n+0)
+        background: transparentize( $color-global-violetblue, .85)
+
+.player__cell
+  @include css3-prefix('flex', '0 0 14%')
+  @include css3-prefix('align-self', 'center')
+  text-align: center
+
+  @include font-size(9)
+
+.player__cell--number
+  @include css3-prefix('flex', '0 0 3%')
+  text-align: right
+
+.player__cell--flag
+  @include css3-prefix('flex', '0 0 7%')
+  @include font-size(9)
+  padding: 0 !important
+
+.player__cell--name
+  @include css3-prefix('flex', '0 0 20%')
+  text-align: left
+
+.player__cell--position
+  @include css3-prefix('flex', '0 0 20%')
+  text-align: left
+
+.player__cell--market-value
+  @include css3-prefix('flex', '0 0 20%')
+  text-align: right

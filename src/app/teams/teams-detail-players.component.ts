@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, NgZone, ChangeDetectorRef,
-  ElementRef, Input } from '@angular/core';
+  ElementRef, Input, Output } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { TeamsStore } from '../stores/teams';

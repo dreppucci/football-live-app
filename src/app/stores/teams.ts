@@ -63,14 +63,16 @@ export class TeamsStore {
     if ( players.hasOwnProperty('players') ) {
       players.players
         .map( (player) => {
+          // FORMAT BIRTHDAY DATE
           let birthday = player.dateOfBirth.split('-');
           let birtdayDate = new Date( birthday[ 0 ], birthday[ 1 ] - 1, birthday[ 2 ] );
-
+          // DECLARE NATIONCODE
           let nationCode = this.nationalityEncoder.getCode(player.nationality);
 
           return player.nationCode = nationCode.toLowerCase(), player.birthdayDate = birtdayDate;
         } );
 
+      // SORT ARRAY BY POSITION AND JERSEYNUMBER ORDER
       players.players.sort( (a, b) => {
         return this.cmp(
           [ this.cmp( a.position, b.position ), this.cmp( a.jerseyNumber, b.jerseyNumber ) ],
