@@ -1,7 +1,5 @@
 .team-detail
   @include clearfix()
-  //@include css3-prefix('display', 'flex')
-  //@include css3-prefix('flex-wrap', 'wrap')
 
 teams-detail-global
   @include clearfix()
@@ -40,7 +38,6 @@ teams-detail-players,
 teams-detail-fixtures
   margin-bottom: 2em
   display: block
-  // @include css3-prefix('flex', '0 0 50%')
 
 teams-detail-players
   h4
@@ -146,12 +143,50 @@ teams-detail-fixtures
 
 .teams-fixture__row
   background: $color-global-white
+  color: $color-global-lightliver
 
   span
     padding: .5em 0
 
+  a
+    color: $color-global-violetblue
+    text-decoration: none
+    @include transition(color .5s $transition-easing-easeInOutCirc)
+    cursor: pointer
+
+    &:hover,
+    &.active
+      text-decoration: none
+      color: $color-global-black
+    &.active
+      cursor: default
+
+
   &:nth-child(odd)
     background: $color-global-light-violetblue
+
+    &[data-status="scheduled"]
+      a
+        color: $color-global-lightliver
+
+  &[data-status="scheduled"]
+    a
+      color: $color-global-light-violetblue
+      pointer-events: none
+
+  &[data-status="finished"]
+    color: $color-global-black
+
+  &[data-status="postponed"],
+  &[data-status="timed"]
+    color: $color-global-terracotta
+
+    &:after
+      display: block
+      content: " (" attr(title) ")"
+      @include css3-prefix('display', 'flex')
+      @include css3-prefix('align-self', 'center')
+      text-transform: uppercase
 
 .teams-fixture__cell
   @include css3-prefix('flex', '0 0 14%')
@@ -188,6 +223,11 @@ teams-detail-fixtures
 
 .teams-fixture__cell--match__team--away
   text-align: left
+
+.teams-fixture__cell--match__team--same
+  font-weight: bold
+  pointer-events: none
+  cursor: default
 
 .teams-fixture__cell--match__result
   @include css3-prefix('flex', '0 0 6%')

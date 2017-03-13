@@ -7,19 +7,20 @@
     <span class="teams-fixture__cell teams-fixture__cell--time">Time</span>
     <span class="teams-fixture__cell teams-fixture__cell--match">Match</span>
   </li>
-  <li class="teams-fixture__row" *ngFor="let fixture of data.fixtures" [ngClass]="{'teams-fixture__row--finished': fixture.status === 'FINISHED' }">
+  <li class="teams-fixture__row" *ngFor="let fixture of data.fixtures" [attr.data-status]="fixture.status | lowercase" title="{{fixture.status}}">
     <span class="teams-fixture__cell teams-fixture__cell--matchday">{{fixture.matchday}}</span>
     <span class="teams-fixture__cell teams-fixture__cell--date">{{fixture.date | date:"EEEE dd MMMM yyyy" }}</span>
     <span class="teams-fixture__cell teams-fixture__cell--time">{{fixture.date | date:"HH:mm" }}</span>
     <span class="teams-fixture__cell teams-fixture__cell--match">
-        <span class="teams-fixture__cell--match__team teams-fixture__cell--match__team--home">{{fixture.homeTeamName}}</span>
+        <span class="teams-fixture__cell--match__team teams-fixture__cell--match__team--home">
+            <a [routerLink]=" ['/teams', fixture.homeTeamLink] " routerLinkActive="teams-fixture__cell--match__team--same" [routerLinkActiveOptions]= "{exact: true}">{{fixture.homeTeamName}}</a>
+        </span>
         <span class="teams-fixture__cell--match__result"><strong>{{fixture.result?.goalsHomeTeam}}</strong></span>
         <span class="teams-fixture__cell--match__divider">-</span>
         <span class="teams-fixture__cell--match__result"><strong>{{fixture.result?.goalsAwayTeam}}</strong></span>
-        <span class="teams-fixture__cell--match__team teams-fixture__cell--match__team--away">{{fixture.awayTeamName}}</span>
+        <span class="teams-fixture__cell--match__team teams-fixture__cell--match__team--away">
+            <a [routerLink]=" ['/teams', fixture.awayTeamLink] " routerLinkActive="teams-fixture__cell--match__team--same" [routerLinkActiveOptions]= "{exact: true}">{{fixture.awayTeamName}}</a>
+        </span>
     </span>
-    <!--<span class="teams-fixture__cell teams-fixture__cell--odds" *ngIf="fixture.odds">homeWin: {{fixture.odds.homeWin}}
-    draws: {{fixture.odds.draws}}
-    awayWin: {{fixture.odds.awayWin}}</span>-->
   </li>
 </ul>

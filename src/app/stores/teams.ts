@@ -54,6 +54,15 @@ export class TeamsStore {
 
   public showFixtures(fixtures) {
     if ( fixtures.hasOwnProperty('fixtures') ) {
+      fixtures.fixtures
+        .map( (fixture) => {
+          let homeTeamLink = fixture._links.homeTeam.href;
+          let homeTeamLinkId = homeTeamLink.split('/teams/');
+          let awayTeamLink = fixture._links.awayTeam.href;
+          let awayTeamLinkId = awayTeamLink.split('/teams/');
+
+          return fixture.homeTeamLink = homeTeamLinkId[1], fixture.awayTeamLink = awayTeamLinkId[1];
+        } );
       this.showFixs.next( fixtures );
     }
   }
