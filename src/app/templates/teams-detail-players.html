@@ -1,22 +1,22 @@
 <h4>The team</h4>
 
 <ul *ngIf="data">
-  <li class="player__header">
-    <span class="player__cell player__cell--number">Nr.</span>
-    <span class="player__cell player__cell--flag"></span>
-    <span class="player__cell player__cell--name">Name</span>
-    <span class="player__cell player__cell--position">Position</span>
-    <span class="player__cell player__cell--birthday">Birthday</span>
-    <span class="player__cell player__cell--contract">Contract until</span>
-    <span class="player__cell player__cell--market-value">Market value</span>
+  <li class="teams-player__header">
+    <span class="teams-player__cell teams-player__cell--number">Nr.</span>
+    <span class="teams-player__cell teams-player__cell--flag"></span>
+    <span class="teams-player__cell teams-player__cell--name">Name</span>
+    <span class="teams-player__cell teams-player__cell--position">Position</span>
+    <span class="teams-player__cell teams-player__cell--birthday">Birthday</span>
+    <span class="teams-player__cell teams-player__cell--contract">Contract until</span>
+    <span class="teams-player__cell teams-player__cell--market-value">Market value</span>
   </li>
-  <li class="player__row" *ngFor="let player of data.players">
-    <span class="player__cell player__cell--number">{{player.jerseyNumber}}</span>
-    <span class="player__cell player__cell--flag flag-icon flag-icon-{{player.nationCode}}" title="{{player.nationality}}"></span>
-    <span class="player__cell player__cell--name">{{player.name}}</span>
-    <span class="player__cell player__cell--position">{{player.position}}</span>
-    <span class="player__cell player__cell--birthday">{{player.birthdayDate | date:"dd/MM/yyyy" }}</span>
-    <span class="player__cell player__cell--contract">{{player.contractUntil | date:"dd/MM/yyyy" }}</span>
-    <span class="player__cell player__cell--market-value">{{player.marketValue}}</span>
+  <li class="teams-player__row" *ngFor="let player of data.players">
+    <span class="teams-player__cell teams-player__cell--number">{{player.jerseyNumber}}</span>
+    <span class="teams-player__cell teams-player__cell--flag flag-icon flag-icon-{{player.nationCode}}" title="{{player.nationality}}"></span>
+    <span class="teams-player__cell teams-player__cell--name">{{player.name}}</span>
+    <span class="teams-player__cell teams-player__cell--position">{{player.position}}</span>
+    <span class="teams-player__cell teams-player__cell--birthday">{{player.birthdayDate | date:"dd/MM/yyyy" }}</span>
+    <span class="teams-player__cell teams-player__cell--contract">{{player.contractUntil | date:"dd/MM/yyyy" }}</span>
+    <span class="teams-player__cell teams-player__cell--market-value">{{player.marketValue}}</span>
   </li>
 </ul>

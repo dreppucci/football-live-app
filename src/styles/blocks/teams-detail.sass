@@ -38,6 +38,8 @@ teams-detail-global
 
 teams-detail-players,
 teams-detail-fixtures
+  margin-bottom: 2em
+  display: block
   // @include css3-prefix('flex', '0 0 50%')
 
 teams-detail-players
@@ -55,7 +57,7 @@ teams-detail-players
       @include css3-prefix('flex-direction', 'row')
       @include css3-prefix('flex-wrap', 'wrap')
 
-.player__header
+.teams-player__header
   background: $color-global-violetblue
   padding: .5em 0
 
@@ -63,7 +65,7 @@ teams-detail-players
     color: $color-global-white
     font-weight: bold
 
-.player__row
+.teams-player__row
   background: $color-global-white
 
   span
@@ -91,30 +93,104 @@ teams-detail-players
       &:nth-child(8n+0)
         background: transparentize( $color-global-violetblue, .85)
 
-.player__cell
+.teams-player__cell
   @include css3-prefix('flex', '0 0 14%')
   @include css3-prefix('align-self', 'center')
   text-align: center
 
   @include font-size(9)
 
-.player__cell--number
+.teams-player__cell--number
   @include css3-prefix('flex', '0 0 3%')
   text-align: right
 
-.player__cell--flag
+.teams-player__cell--flag
   @include css3-prefix('flex', '0 0 7%')
   @include font-size(9)
   padding: 0 !important
 
-.player__cell--name
+.teams-player__cell--name
   @include css3-prefix('flex', '0 0 20%')
   text-align: left
 
-.player__cell--position
+.teams-player__cell--position
   @include css3-prefix('flex', '0 0 20%')
   text-align: left
 
-.player__cell--market-value
+.teams-player__cell--market-value
   @include css3-prefix('flex', '0 0 20%')
   text-align: right
+
+teams-detail-fixtures
+  h4
+    @include font-size(14)
+    line-height: 1em
+    margin: 0 0 1em
+    text-align: center
+
+  ul
+    display: block
+
+    li
+      @include css3-prefix('display', 'flex')
+      @include css3-prefix('flex-direction', 'row')
+      @include css3-prefix('flex-wrap', 'wrap')
+
+.teams-fixture__header
+  background: $color-global-violetblue
+  padding: .5em 0
+
+  span
+    color: $color-global-white
+    font-weight: bold
+
+.teams-fixture__row
+  background: $color-global-white
+
+  span
+    padding: .5em 0
+
+  &:nth-child(odd)
+    background: $color-global-light-violetblue
+
+.teams-fixture__cell
+  @include css3-prefix('flex', '0 0 14%')
+  @include css3-prefix('align-self', 'center')
+  text-align: center
+
+  @include font-size(9)
+
+.teams-fixture__cell--matchday
+  @include css3-prefix('flex', '0 0 7%')
+
+.teams-fixture__cell--date
+  @include css3-prefix('flex', '0 0 16%')
+  text-align: left
+
+.teams-fixture__cell--time
+  @include css3-prefix('flex', '0 0 7%')
+
+.teams-fixture__cell--match
+  @include css3-prefix('display', 'flex')
+  @include css3-prefix('justify-content', 'center')
+  @include css3-prefix('flex', '0 0 40%')
+
+.teams-fixture__cell--match__team,
+.teams-fixture__cell--match__result,
+.teams-fixture__cell--match__divider
+  padding: 0 !important
+
+.teams-fixture__cell--match__team
+  @include css3-prefix('flex', '0 0 39%')
+
+.teams-fixture__cell--match__team--home
+  text-align: right
+
+.teams-fixture__cell--match__team--away
+  text-align: left
+
+.teams-fixture__cell--match__result
+  @include css3-prefix('flex', '0 0 6%')
+
+.teams-fixture__cell--match__divider
+  @include css3-prefix('flex', '0 0 2%')
