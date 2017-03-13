@@ -1,11 +1,13 @@
 .team-detail
   @include clearfix()
 
+
 teams-detail-global
   @include clearfix()
   @include css3-prefix('display', 'flex')
   @include css3-prefix('justify-content', 'center')
   margin: 0 0 3em
+  width: 100%
   
   figure
     @include css3-prefix('flex', '0 0 6%')
@@ -40,6 +42,7 @@ teams-detail-fixtures
   display: block
 
 teams-detail-players
+
   h4
     @include font-size(14)
     line-height: 1em
@@ -48,11 +51,21 @@ teams-detail-players
 
   ul
     display: block
+    clear: both
 
-    li
+    li.teams-player__header,
+    li.teams-player__row
       @include css3-prefix('display', 'flex')
       @include css3-prefix('flex-direction', 'row')
       @include css3-prefix('flex-wrap', 'wrap')
+
+    li.teams-player__group
+      strong
+        display: block
+        @include font-size(9)
+        padding: .5em
+        border-top: 1px $color-global-lightliver solid
+        border-bottom: 1px $color-global-lightliver solid
 
 .teams-player__header
   background: $color-global-violetblue
@@ -91,14 +104,13 @@ teams-detail-players
         background: transparentize( $color-global-violetblue, .85)
 
 .teams-player__cell
-  @include css3-prefix('flex', '0 0 14%')
   @include css3-prefix('align-self', 'center')
   text-align: center
 
   @include font-size(9)
 
 .teams-player__cell--number
-  @include css3-prefix('flex', '0 0 3%')
+  @include css3-prefix('flex', '0 0 4%')
   text-align: right
 
 .teams-player__cell--flag
@@ -107,15 +119,21 @@ teams-detail-players
   padding: 0 !important
 
 .teams-player__cell--name
-  @include css3-prefix('flex', '0 0 20%')
+  @include css3-prefix('flex', '0 0 41%')
   text-align: left
 
-.teams-player__cell--position
+.teams-player__cell--age
+  @include css3-prefix('flex', '0 0 8%')
+
+.teams-player__cell--birthday
+  @include css3-prefix('flex', '0 0 14%')
+
+.teams-player__cell--contract
   @include css3-prefix('flex', '0 0 20%')
-  text-align: left
 
 .teams-player__cell--market-value
-  @include css3-prefix('flex', '0 0 20%')
+  @include css3-prefix('flex', '0 0 19%')
+  padding: .5em 1% .5em 0 !important
   text-align: right
 
 teams-detail-fixtures
@@ -187,6 +205,8 @@ teams-detail-fixtures
       @include css3-prefix('display', 'flex')
       @include css3-prefix('align-self', 'center')
       text-transform: uppercase
+      position: absolute
+      right: 2%
 
 .teams-fixture__cell
   @include css3-prefix('flex', '0 0 14%')
@@ -196,10 +216,10 @@ teams-detail-fixtures
   @include font-size(9)
 
 .teams-fixture__cell--matchday
-  @include css3-prefix('flex', '0 0 7%')
+  @include css3-prefix('flex', '0 0 9%')
 
 .teams-fixture__cell--date
-  @include css3-prefix('flex', '0 0 16%')
+  @include css3-prefix('flex', '0 0 20%')
   text-align: left
 
 .teams-fixture__cell--time
@@ -208,7 +228,7 @@ teams-detail-fixtures
 .teams-fixture__cell--match
   @include css3-prefix('display', 'flex')
   @include css3-prefix('justify-content', 'center')
-  @include css3-prefix('flex', '0 0 40%')
+  @include css3-prefix('flex', '0 0 64%')
 
 .teams-fixture__cell--match__team,
 .teams-fixture__cell--match__result,

@@ -27,6 +27,7 @@ import { AppStore, InternalStateType } from './stores/app';
 import { SearchLeagueStore } from './stores/search-league';
 import { TeamsStore } from './stores/teams';
 import { NationalityEncoder } from './services/nationalityEncoder';
+import { KeysPipe } from './services/keysPipe';
 import { HomeComponent } from './home';
 import { SearchLeagueComponent } from './search-league';
 import { TeamsStandingComponent } from './teams-standing';
@@ -70,7 +71,8 @@ type StoreType = {
     TeamsDetailPlayersComponent,
     LeaguesComponent,
     LeaguesDetailComponent,
-    NoContentComponent
+    NoContentComponent,
+    KeysPipe
   ],
   imports: [ // import Angular's modules
     BrowserModule,

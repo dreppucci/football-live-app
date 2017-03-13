@@ -13,6 +13,7 @@ import { OrderBy } from '../services/orderBy';
 })
 export class TeamsDetailPlayersComponent implements AfterViewInit {
 
+  public playersGroup: Object = [];
   @Input() public data: Object;
   @Input('teamId') private teamId: string;
 
@@ -36,8 +37,7 @@ export class TeamsDetailPlayersComponent implements AfterViewInit {
   private subscribeToStoreProperty() {
     this.teamsStore.teamPlayers
       .subscribe( (data) => {
-        this.data = data;
-        this.cdref.detectChanges();
+        this.groupData(data);
       } );
   }
 
@@ -49,6 +49,23 @@ export class TeamsDetailPlayersComponent implements AfterViewInit {
       );
   }
 
+  private groupData(data) {
+    data.players
+      .map( (player) => {
+        let positionName = player.position;
+
+        if (!this.playersGroup[positionName]) {
+          this.playersGroup[positionName] = [];
+          this.playersGroup[positionName].name = positionName;
+          this.playersGroup[positionName].push( player );
+        } else {
+          this.playersGroup[positionName].push( player );
+        }
+      } );
+    this.data = this.playersGroup;
+    this.cdref.detectChanges();
+  }
+
   private asyncMockedData() {
     setTimeout(() => {
 
@@ -58,11 +75,6 @@ export class TeamsDetailPlayersComponent implements AfterViewInit {
         });
 
     });
-  }
-
-  private unsubscribeToStoreProperty() {
-    this.teamsStore.teamPlayers
-      .unsubscribe();
   }
 
 }

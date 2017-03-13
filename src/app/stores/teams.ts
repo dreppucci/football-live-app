@@ -70,17 +70,6 @@ export class TeamsStore {
   public showPlayers(players) {
 
     if ( players.hasOwnProperty('players') ) {
-      players.players
-        .map( (player) => {
-          // FORMAT BIRTHDAY DATE
-          let birthday = player.dateOfBirth.split('-');
-          let birtdayDate = new Date( birthday[ 0 ], birthday[ 1 ] - 1, birthday[ 2 ] );
-          // DECLARE NATIONCODE
-          let nationCode = this.nationalityEncoder.getCode(player.nationality);
-
-          return player.nationCode = nationCode.toLowerCase(), player.birthdayDate = birtdayDate;
-        } );
-
       // SORT ARRAY BY POSITION AND JERSEYNUMBER ORDER
       players.players.sort( (a, b) => {
         return this.cmp(
@@ -88,6 +77,19 @@ export class TeamsStore {
           [ this.cmp( b.position, a.position ), this.cmp( b.jerseyNumber, a.jerseyNumber ) ]
         );
       } );
+
+      players.players
+        .map( (player) => {
+          // CALCULATE AGE
+          let birthDayTime = new Date(player.dateOfBirth).getTime();
+          let timeDiff = Math.abs( Date.now() - birthDayTime );
+          let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+
+          // DECLARE NATIONCODE
+          let nationCode = this.nationalityEncoder.getCode(player.nationality);
+
+          return player.nationCode = nationCode.toLowerCase(), player.age = age;
+        } );
 
       this.showPlays.next(players);
     }
