@@ -1,5 +1,3 @@
-<h4>The team</h4>
-
 <ul *ngIf="data">
   <li class="teams-player__header">
     <span class="teams-player__cell teams-player__cell--number">Nr.</span>
@@ -9,7 +7,7 @@
     <span class="teams-player__cell teams-player__cell--contract">Contract until</span>
     <span class="teams-player__cell teams-player__cell--market-value">Market value</span>
   </li>
-  <li class="teams-player__group" *ngFor="let group of data | keys">
+  <li class="teams-player__group" *ngFor="let group of data | myKeys">
     <strong>{{group.key}}</strong>
     <ul>
       <li class="teams-player__row" *ngFor="let player of group.value">

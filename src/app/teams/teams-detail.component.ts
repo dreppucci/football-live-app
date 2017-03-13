@@ -4,6 +4,8 @@ import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef,
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '../services/http-client';
 
+import { TabsComponent, TabComponent } from './../tabs/';
+
 @Component({
   selector: 'teams-detail',
   providers: [HttpClient],

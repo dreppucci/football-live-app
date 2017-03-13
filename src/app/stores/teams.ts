@@ -83,7 +83,7 @@ export class TeamsStore {
           // CALCULATE AGE
           let birthDayTime = new Date(player.dateOfBirth).getTime();
           let timeDiff = Math.abs( Date.now() - birthDayTime );
-          let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+          let age = Math.floor( ( timeDiff / ( 1000 * 3600 * 24 ) ) / 365 );
 
           // DECLARE NATIONCODE
           let nationCode = this.nationalityEncoder.getCode(player.nationality);

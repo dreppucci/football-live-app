@@ -35,6 +35,7 @@ import { LeaguesComponent, LeaguesDetailComponent } from './leagues';
 import { TeamsDetailComponent, TeamsDetailGlobalComponent,
   TeamsDetailFixturesComponent, TeamsDetailPlayersComponent } from './teams';
 import { AboutComponent } from './about';
+import { TabsComponent, TabComponent } from './tabs';
 import { NoContentComponent } from './no-content';
 
 import '../styles/App.sass';
@@ -71,6 +72,8 @@ type StoreType = {
     TeamsDetailPlayersComponent,
     LeaguesComponent,
     LeaguesDetailComponent,
+    TabsComponent,
+    TabComponent,
     NoContentComponent,
     KeysPipe
   ],
