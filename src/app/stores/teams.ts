@@ -86,9 +86,10 @@ export class TeamsStore {
           let age = Math.floor( ( timeDiff / ( 1000 * 3600 * 24 ) ) / 365 );
 
           // DECLARE NATIONCODE
-          let nationCode = this.nationalityEncoder.getCode(player.nationality);
+          let nationCode = typeof this.nationalityEncoder !== 'undefined' ?
+            this.nationalityEncoder.getCode(player.nationality) : '';
 
-          return player.nationCode = nationCode.toLowerCase(), player.age = age;
+          return player.nationCode = nationCode, player.age = age;
         } );
 
       this.showPlays.next(players);

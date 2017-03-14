@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, NgZone, ChangeDetectorRef,
-  ElementRef, Input } from '@angular/core';
+import { Component, AfterViewInit, OnChanges, OnDestroy, NgZone,
+  ChangeDetectorRef, ElementRef, Input } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { TeamsStore } from '../stores/teams';
@@ -10,10 +10,10 @@ import { HttpClient } from '../services/http-client';
   providers: [HttpClient, TeamsStore],
   templateUrl: '../templates/teams-detail-global.html'
 })
-export class TeamsDetailGlobalComponent implements AfterViewInit {
+export class TeamsDetailGlobalComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   @Input() public data: Object;
-  @Input('teamId') private teamId: string;
+  @Input('teamId') private teamId: number;
 
   constructor(
     public route: ActivatedRoute,
@@ -28,8 +28,16 @@ export class TeamsDetailGlobalComponent implements AfterViewInit {
   public ngAfterViewInit () {
     this.subscribeToStoreProperty();
 
-    // this.getData();
-    this.asyncMockedData();
+    this.getData();
+    // this.asyncMockedData();
+  }
+
+  public ngOnChanges() {
+    this.getData();
+  }
+
+  public ngOnDestroy() {
+    this.unsubscribeToStoreProperty();
   }
 
   private subscribeToStoreProperty() {

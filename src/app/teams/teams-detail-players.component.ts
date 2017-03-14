@@ -1,7 +1,7 @@
-import { Component, AfterViewInit, NgZone, ChangeDetectorRef,
-  ElementRef, Input, Output } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef,
+  ElementRef, Input } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeamsStore } from '../stores/teams';
 import { HttpClient } from '../services/http-client';
 import { OrderBy } from '../services/orderBy';
@@ -11,14 +11,16 @@ import { OrderBy } from '../services/orderBy';
   providers: [HttpClient, TeamsStore],
   templateUrl: '../templates/teams-detail-players.html'
 })
-export class TeamsDetailPlayersComponent implements AfterViewInit {
+export class TeamsDetailPlayersComponent implements AfterViewInit, OnDestroy {
 
   public playersGroup: Object = [];
   @Input() public data: Object;
-  @Input('teamId') private teamId: string;
+  @Input('teamId') private teamId: number;
+  private sub: any;
 
   constructor(
     public route: ActivatedRoute,
+    public router: Router,
     private teamsStore: TeamsStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
@@ -28,10 +30,19 @@ export class TeamsDetailPlayersComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit () {
-    this.subscribeToStoreProperty();
+    this.sub = this.router.routerState.parent(this.route)
+      .params.subscribe( (params) => {
+        this.teamId = +params['id'];
 
-    // this.getData();
-    this.asyncMockedData();
+        this.getData();
+        // this.asyncMockedData();
+      });
+
+    this.subscribeToStoreProperty();
+  }
+
+  public ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   private subscribeToStoreProperty() {
@@ -63,6 +74,7 @@ export class TeamsDetailPlayersComponent implements AfterViewInit {
         }
       } );
     this.data = this.playersGroup;
+    this.data.count = data.count;
     this.cdref.detectChanges();
   }
 

@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef,
-  ElementRef, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone,
+  ChangeDetectorRef, ElementRef, Input } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '../services/http-client';
 
 import { TabsComponent, TabComponent } from './../tabs/';
@@ -18,6 +18,7 @@ export class TeamsDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     public route: ActivatedRoute,
+    public router: Router,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
     private http: HttpClient
