@@ -4,5 +4,5 @@
 <div class="team-detail__infos">
   <h4>{{data?.name}}</h4>
   <h5>{{data?.shortName}}</h5>
-  <p class="teams-details__info-marketvalue"><strong>Market value</strong>: {{data?.squadMarketValue}}</p>
+  <p *ngIf="data?.squadMarketValue" class="teams-details__info-marketvalue"><strong>Market value</strong>: {{data?.squadMarketValue}}</p>
 </div>

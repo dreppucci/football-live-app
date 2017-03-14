@@ -1,14 +1,16 @@
 import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef,
-  ElementRef, Input } from '@angular/core';
+  ElementRef, Input, HostBinding } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { AppStore } from '../stores/app';
 import { HttpClient } from '../services/http-client';
+import { RouteAnimation } from '../animations';
 
 @Component({
   selector: 'leagues',
   providers: [HttpClient],
-  templateUrl: '../templates/leagues.html'
+  templateUrl: '../templates/leagues.html',
+  animations: [RouteAnimation]
 })
 export class LeaguesComponent implements OnInit, OnDestroy {
 
@@ -24,6 +26,8 @@ export class LeaguesComponent implements OnInit, OnDestroy {
     console.clear();
   }
 
+  @HostBinding('@routeAnimation')
+
   public ngOnInit() {
     this.getLeaguesData();
   }
@@ -34,17 +38,20 @@ export class LeaguesComponent implements OnInit, OnDestroy {
 
   private getLeaguesData() {
     if ( this.appStore.get('leagues') === undefined ) {
-      /*this.http.get('competitions')
-        .subscribe(
-          (data: any) => this.saveLeaguesData(data.json()),
-          (error) => console.log(error)
-      );*/
-
-      this.asyncMockedData();
+      this.getData();
+      // this.asyncMockedData();
 
     } else {
       this.saveLeaguesData( this.appStore.get('leagues') );
     }
+  }
+
+  private getData() {
+    this.http.get('competitions')
+      .subscribe(
+        (data: any) => this.saveLeaguesData(data.json()),
+        (error) => console.log(error)
+    );
   }
 
   private saveLeaguesData(data: Object) {

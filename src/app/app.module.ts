@@ -37,7 +37,7 @@ import { TeamsDetailComponent, TeamsDetailGlobalComponent,
 import { AboutComponent } from './about';
 import { TabsComponent, TabComponent } from './tabs';
 import { NoContentComponent } from './no-content';
-import { DefaultImage } from './directives/img.directive';
+import { DefaultImageDirective } from './directives/img.directive';
 
 import '../styles/App.sass';
 
@@ -77,7 +77,7 @@ type StoreType = {
     TabComponent,
     NoContentComponent,
     KeysPipe,
-    DefaultImage
+    DefaultImageDirective
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -89,7 +89,7 @@ type StoreType = {
     ENV_PROVIDERS,
     APP_PROVIDERS
   ],
-  exports: [DefaultImage]
+  exports: [DefaultImageDirective]
 })
 export class AppModule {
 

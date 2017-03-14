@@ -1,15 +1,17 @@
 import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef,
-  ElementRef, Input } from '@angular/core';
+  ElementRef, Input, HostBinding } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamsStore } from '../stores/teams';
 import { HttpClient } from '../services/http-client';
 import { OrderBy } from '../services/orderBy';
+import { TabAnimation } from '../animations';
 
 @Component({
   selector: 'teams-detail-players',
   providers: [HttpClient, TeamsStore],
-  templateUrl: '../templates/teams-detail-players.html'
+  templateUrl: '../templates/teams-detail-players.html',
+  animations: [TabAnimation]
 })
 export class TeamsDetailPlayersComponent implements AfterViewInit, OnDestroy {
 
@@ -28,6 +30,8 @@ export class TeamsDetailPlayersComponent implements AfterViewInit, OnDestroy {
   ) {
     console.clear();
   }
+
+  @HostBinding('@tabAnimation')
 
   public ngAfterViewInit () {
     this.sub = this.router.routerState.parent(this.route)

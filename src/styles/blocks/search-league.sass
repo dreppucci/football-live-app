@@ -66,10 +66,9 @@ search-league
 .search-league__hints
   position: absolute
   width: 100%
-  max-width: 298px
-  top: 42px
+  max-width: 300px
+  top: 43px
   background: $color-global-white
-  border: 1px $color-global-darkliver solid
   max-height: 100px
   overflow: hidden
   overflow-y: auto
@@ -90,6 +89,9 @@ search-league
       text-decoration: none
       @include transition(color .5s $transition-easing-easeInOutCirc, background-color .5s $transition-easing-easeInOutCirc)
       cursor: pointer
+      border: 1px $color-global-darkliver solid
+      border-top: none
+      border-bottom: none
 
       &:hover
         text-decoration: none
@@ -98,3 +100,10 @@ search-league
 
     &:nth-child(odd)
       background: $color-global-light-violetblue
+
+    &:last-child
+      a
+        border-bottom: 1px $color-global-darkliver solid
+
+    &:empty
+      display: none

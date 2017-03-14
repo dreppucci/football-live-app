@@ -1,14 +1,16 @@
 import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef,
-  ElementRef, Input } from '@angular/core';
+  ElementRef, Input, HostBinding } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamsStore } from '../stores/teams';
 import { HttpClient } from '../services/http-client';
+import { TabAnimation } from '../animations';
 
 @Component({
   selector: 'teams-detail-fixtures',
   providers: [HttpClient, TeamsStore],
-  templateUrl: '../templates/teams-detail-fixtures.html'
+  templateUrl: '../templates/teams-detail-fixtures.html',
+  animations: [TabAnimation]
 })
 export class TeamsDetailFixturesComponent implements AfterViewInit, OnDestroy {
 
@@ -26,6 +28,8 @@ export class TeamsDetailFixturesComponent implements AfterViewInit, OnDestroy {
   ) {
     console.clear();
   }
+
+  @HostBinding('@tabAnimation')
 
   public ngAfterViewInit () {
     this.sub = this.router.routerState.parent(this.route)

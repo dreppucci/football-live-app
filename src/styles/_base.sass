@@ -58,9 +58,14 @@ main
 
 home,
 leagues,
-leagues-detail
+leagues-detail,
+teams-detail,
+teams-detail-fixtures,
+teams-detail-players
   @include clearfix()
   display: block
+  width: 100%
+  position: absolute
 
 .btn-back
   margin: 0 0 1em 1em
@@ -119,4 +124,4 @@ img[data-preload="true"]
     @include css3-prefix('transform', 'translate(0%, -130%)')
 
 [placeholder]:focus::-webkit-input-placeholder
-  color: transparent;
+  color: transparent

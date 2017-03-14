@@ -72,10 +72,4 @@ export class TeamsDetailGlobalComponent implements AfterViewInit, OnChanges, OnD
       .unsubscribe();
   }
 
-  private imageErrorHandler(event) {
-    console.log(event);
-    console.log(this.data);
-    //this.data.crestUrl = '../../assets/gfx/lgo.svg';
-  }
-
 }

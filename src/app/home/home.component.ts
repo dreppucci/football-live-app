@@ -1,8 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { RouteAnimation } from '../animations';
 
 @Component({
   selector: 'home',
-  templateUrl: '../templates/home.html'
+  templateUrl: '../templates/home.html',
+  animations: [RouteAnimation]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  constructor() {
+    console.clear();
+  }
+
+  @HostBinding('@routeAnimation')
+
+  public ngOnInit() {
+    console.clear();
+  }
 }

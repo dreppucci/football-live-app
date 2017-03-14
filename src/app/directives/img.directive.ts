@@ -1,12 +1,12 @@
-import { Directive, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 
 @Directive({
   selector: '[src-fallback]'
 })
-export class DefaultImage {
+export class DefaultImageDirective implements OnDestroy {
 
-  @Input('src-fallback') imgSrc: string;
-  @Output('loaded') loaded: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input('src-fallback') private srcFallback: string;
+  @Output('loaded') private loaded: EventEmitter<boolean> = new EventEmitter<boolean>();
   private el: HTMLElement;
   private isApplied: boolean = false;
   private ERROR_EVENT_TYPE: string = 'error';
@@ -18,12 +18,17 @@ export class DefaultImage {
     this.el.addEventListener(this.LOAD_EVENT_TYPE, this.onLoad.bind(this));
   }
 
+  public ngOnDestroy() {
+    this.removeErrorEvent();
+    this.removeOnLoadEvent();
+  }
+
   private onError() {
     this.removeErrorEvent();
 
     if (!this.isApplied) {
       this.isApplied = true;
-      this.el.setAttribute('src', this.imgSrc);
+      this.el.setAttribute('src', this.srcFallback);
     }
 
     this.removeOnLoadEvent();
@@ -40,10 +45,5 @@ export class DefaultImage {
 
   private removeOnLoadEvent() {
     this.el.removeEventListener(this.LOAD_EVENT_TYPE, this.onLoad);
-  }
-
-  ngOnDestroy() {
-    this.removeErrorEvent();
-    this.removeOnLoadEvent();
   }
 }
