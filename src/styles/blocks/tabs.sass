@@ -1,0 +1,34 @@
+.tabs
+  clear: both
+  @include clearfix()
+
+  li
+    display: inline
+    float: left
+    
+    a
+      display: block
+      text-decoration: none
+      @include font-size(10)
+      padding: 0 1em
+      line-height: 2em
+      background: $color-global-lightliver
+      color: $color-global-black
+      cursor: pointer
+      @include transition(color .5s $transition-easing-easeInOutCirc, background .5s $transition-easing-easeInOutCirc)
+
+      &:hover
+        background: $color-global-sunglow
+        color: $color-global-terracotta
+
+      &.active
+        background: $color-global-sunglow
+        color: $color-global-black
+        pointer-events: none
+        cursor: default
+
+        &:hover
+          background: $color-global-sunglow
+          color: $color-global-black
+
+.tabs__content

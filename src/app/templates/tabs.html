@@ -1,6 +1,6 @@
-<ul class="nav nav-tabs">
-  <li *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">
-    <a [href]="tab.href" [title]="tab.title">{{tab.title}}</a>
+<ul class="tabs">
+  <li *ngFor="let tab of tabs" (click)="selectTab(tab)">
+    <a [routerLink]="tab.href" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}" [title]="tab.title">{{tab.title}}</a>
   </li>
 </ul>
 <ng-content></ng-content>

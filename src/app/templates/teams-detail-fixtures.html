@@ -11,13 +11,13 @@
     <span class="teams-fixture__cell teams-fixture__cell--time">{{fixture.date | date:"HH:mm" }}</span>
     <span class="teams-fixture__cell teams-fixture__cell--match">
         <span class="teams-fixture__cell--match__team teams-fixture__cell--match__team--home">
-            <a [routerLink]=" ['/teams', fixture.homeTeamLink] " routerLinkActive="teams-fixture__cell--match__team--same" [routerLinkActiveOptions]= "{exact: true}">{{fixture.homeTeamName}}</a>
+            <a [routerLink]=" ['/teams', fixture.homeTeamLink] " routerLinkActive="teams-fixture__cell--match__team--same" [routerLinkActiveOptions]= "{exact: false}">{{fixture.homeTeamName}}</a>
         </span>
         <span class="teams-fixture__cell--match__result"><strong>{{fixture.result?.goalsHomeTeam}}</strong></span>
         <span class="teams-fixture__cell--match__divider">-</span>
         <span class="teams-fixture__cell--match__result"><strong>{{fixture.result?.goalsAwayTeam}}</strong></span>
         <span class="teams-fixture__cell--match__team teams-fixture__cell--match__team--away">
-            <a [routerLink]=" ['/teams', fixture.awayTeamLink] " routerLinkActive="teams-fixture__cell--match__team--same" [routerLinkActiveOptions]= "{exact: true}">{{fixture.awayTeamName}}</a>
+            <a [routerLink]=" ['/teams', fixture.awayTeamLink] " routerLinkActive="teams-fixture__cell--match__team--same" [routerLinkActiveOptions]= "{exact: false}">{{fixture.awayTeamName}}</a>
         </span>
     </span>
   </li>

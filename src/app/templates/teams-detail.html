@@ -8,12 +8,8 @@
 <div class="team-detail">
   <teams-detail-global [teamId]="id"></teams-detail-global>
   <tabs>
-    <tab title="Team" href="#/teams/{{id}}/team">
-      <!--<teams-detail-players [teamId]="id"></teams-detail-players>-->
-    </tab>
-    <tab title="Fixtures" href="#/teams/{{id}}/fixtures">
-      <!--<teams-detail-fixtures [teamId]="id"></teams-detail-fixtures>-->
-    </tab>
+    <tab title="Team" href="team" innerContent="false"></tab>
+    <tab title="Fixtures" href="fixtures" innerContent="false"></tab>
+    <router-outlet></router-outlet>
   </tabs>
-  <router-outlet></router-outlet>
 </div>

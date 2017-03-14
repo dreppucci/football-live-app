@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
 export class TabComponent {
   @Input() public title: string;
   @Input() public href: string;
+  @Input() public innerContent: string;
   @Input() public active = false;
 }
