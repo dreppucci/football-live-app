@@ -94,6 +94,13 @@ leagues-detail
       svg
         fill: $color-global-violetblue
 
+img[data-preload="true"]
+  @include css3-prefix('opacity', 0)
+  @include transition(opacity .5s $transition-easing-easeInOutCirc)
+
+.is-loaded
+  @include css3-prefix('opacity', '1 !important')
+
 .is-visible
   display: block;
 

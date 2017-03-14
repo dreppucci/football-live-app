@@ -22,7 +22,7 @@
   <div *ngFor="let team of teams?.standing" [ngClass]="{'teams-standing__row': true, 'teams-standing__row--full': fullData != false}">
     <ul>
       <li class="teams-standing__row-cell teams-standing__row-cell--position">{{team.position}}.</li>
-      <li class="teams-standing__row-cell teams-standing__row-cell--image"><img [src]="team.crestURI" alt="{{team.teamName}}" title="{{team.teamName}}" /></li>
+      <li class="teams-standing__row-cell teams-standing__row-cell--image"><img data-preload="true" [src]="team.crestURI" src-fallback="../../assets/gfx/lgo.svg" alt="{{team.teamName}}" title="{{team.teamName}}" /></li>
       <li class="teams-standing__row-cell teams-standing__row-cell--name">
         <a [routerLink]=" ['/teams/', team.teamId] "
           routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}" title="{{team.teamName}}">
