@@ -7,7 +7,8 @@
   </li>
   <li class="teams-fixture__row" *ngFor="let fixture of data.fixtures" [attr.data-status]="fixture.status | lowercase" [title]="fixture.status | lowercase">
     <span class="teams-fixture__cell teams-fixture__cell--matchday">{{fixture.matchday}}</span>
-    <span class="teams-fixture__cell teams-fixture__cell--date">{{fixture.date | date:"dd MMMM yyyy" }}</span>
+    <span class="teams-fixture__cell teams-fixture__cell--date" *ngIf="width > 850">{{fixture.date | date:"EEEE dd MMMM yyyy" }}</span>
+    <span class="teams-fixture__cell teams-fixture__cell--date" *ngIf="width < 849">{{fixture.date | date:"dd/MM/yyyy" }}</span>
     <span class="teams-fixture__cell teams-fixture__cell--time">{{fixture.date | date:"HH:mm" }}</span>
     <span class="teams-fixture__cell teams-fixture__cell--match">
         <span class="teams-fixture__cell--match__team teams-fixture__cell--match__team--home">

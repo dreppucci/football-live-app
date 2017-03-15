@@ -6,35 +6,35 @@
       {{teams?.leagueCaption}}
     </a>
   </h3>
-  <header [ngClass]="{'teams-standing__header': true, 'teams-standing__header--full': fullData != false}">
+  <header [ngClass]="{'teams-standing__header': true, 'teams-standing__full': fullData != false}">
     <ul>
-      <li class="teams-standing__header-cell teams-standing__header-cell--position"> </li>
-      <li class="teams-standing__header-cell teams-standing__header-cell--empty"> </li>
-      <li class="teams-standing__header-cell teams-standing__header-cell--name">Team</li>
-      <li class="teams-standing__header-cell teams-standing__header-cell--pts">Pts</li>
-      <li class="teams-standing__header-cell teams-standing__header-cell--goals">Goals</li>
-      <li class="teams-standing__header-cell teams-standing__header-cell--played">Played games</li>
-      <li class="teams-standing__header-cell teams-standing__header-cell--wins">Wins</li>
-      <li class="teams-standing__header-cell teams-standing__header-cell--draws">Draws</li>
-      <li class="teams-standing__header-cell teams-standing__header-cell--losses">Losses</li>
+      <li class="teams-standing__cell teams-standing__cell--position"> </li>
+      <li class="teams-standing__cell teams-standing__cell--image"> </li>
+      <li class="teams-standing__cell teams-standing__cell--name">Team</li>
+      <li class="teams-standing__cell teams-standing__cell--pts">Pts</li>
+      <li class="teams-standing__cell teams-standing__cell--goals">Goals</li>
+      <li class="teams-standing__cell teams-standing__cell--played">Played games</li>
+      <li class="teams-standing__cell teams-standing__cell--wins">Wins</li>
+      <li class="teams-standing__cell teams-standing__cell--draws">Draws</li>
+      <li class="teams-standing__cell teams-standing__cell--losses">Losses</li>
     </ul>
   </header>
-  <div *ngFor="let team of teams?.standing" [ngClass]="{'teams-standing__row': true, 'teams-standing__row--full': fullData != false}">
+  <div *ngFor="let team of teams?.standing" [ngClass]="{'teams-standing__row': true, 'teams-standing__full': fullData != false}">
     <ul>
-      <li class="teams-standing__row-cell teams-standing__row-cell--position">{{team.position}}.</li>
-      <li class="teams-standing__row-cell teams-standing__row-cell--image"><img data-preload="true" [src]="team.crestURI" src-fallback="../../assets/gfx/lgo.svg" alt="{{team.teamName}}" title="{{team.teamName}}" /></li>
-      <li class="teams-standing__row-cell teams-standing__row-cell--name">
+      <li class="teams-standing__cell teams-standing__cell--position">{{team.position}}.</li>
+      <li class="teams-standing__cell teams-standing__cell--image"><img data-preload="true" [src]="team.crestURI" src-fallback="../../assets/gfx/lgo.svg" alt="{{team.teamName}}" title="{{team.teamName}}" /></li>
+      <li class="teams-standing__cell teams-standing__cell--name">
         <a [routerLink]=" ['/teams/', team.teamId] "
           routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}" title="{{team.teamName}}">
           {{team.teamName}}
         </a>
       </li>
-      <li class="teams-standing__row-cell teams-standing__row-cell--pts">{{team.points}}</li>
-      <li class="teams-standing__row-cell teams-standing__row-cell--goals">{{team.goals}}</li>
-      <li class="teams-standing__row-cell teams-standing__row-cell--played">{{team.playedGames}}</li>
-      <li class="teams-standing__row-cell teams-standing__row-cell--wins">{{team.wins}}</li>
-      <li class="teams-standing__row-cell teams-standing__row-cell--draws">{{team.draws}}</li>
-      <li class="teams-standing__row-cell teams-standing__row-cell--losses">{{team.losses}}</li>
+      <li class="teams-standing__cell teams-standing__cell--pts">{{team.points}}</li>
+      <li class="teams-standing__cell teams-standing__cell--goals">{{team.goals}}</li>
+      <li class="teams-standing__cell teams-standing__cell--played">{{team.playedGames}}</li>
+      <li class="teams-standing__cell teams-standing__cell--wins">{{team.wins}}</li>
+      <li class="teams-standing__cell teams-standing__cell--draws">{{team.draws}}</li>
+      <li class="teams-standing__cell teams-standing__cell--losses">{{team.losses}}</li>
     </ul>
   </div>
 </div>

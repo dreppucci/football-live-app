@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { AppStore } from './stores/app';
+import { ScrollToY }  from './services';
 
 @Component({
   selector: 'app',
@@ -10,11 +12,17 @@ import { AppStore } from './stores/app';
 export class AppComponent implements OnInit {
 
   constructor(
-    public appState: AppStore
+    public router: Router,
+    public scroller: ScrollToY
   ) {}
 
   public ngOnInit() {
-    console.log('Initial App State', this.appState.state);
+    this.router.events.subscribe((evt) => {
+      if ( !( evt instanceof NavigationEnd ) ) {
+        return;
+      }
+      this.scroller.scrollToY(0, 1500);
+    });
   }
 
 }

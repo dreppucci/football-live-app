@@ -6,7 +6,8 @@ teams-detail-global
   @include clearfix()
   @include css3-prefix('display', 'flex')
   @include css3-prefix('justify-content', 'center')
-  margin: 0 0 3em
+  margin: 0 auto 3em
+  padding-top: 20px
   width: 100%
   
   figure
@@ -17,6 +18,12 @@ teams-detail-global
       display: block
       width: 100%
       min-width: 76px
+
+      @include bp-1023()
+        min-width: 65px
+
+      @include bp-767()
+        min-width: 55px
 
   .team-detail__infos
     @include css3-prefix('flex', '0 0 auto')
@@ -32,6 +39,9 @@ teams-detail-global
       @include bp-1023()
         @include font-size(16)
 
+      @include bp-767()
+        @include font-size(12)
+
     h5
       @include font-size(9)
       color: $color-global-darkliver
@@ -44,10 +54,22 @@ teams-detail-global
       @include bp-1023()
         @include font-size(8)
 
+      @include bp-767()
+        @include font-size(7)
+
 .teams-details__info-marketvalue
   @include font-size(10)
   line-height: 1em
   margin: 0 0 .2em
+
+  @include bp-1024-landscape()
+    @include font-size(8)
+    
+  @include bp-1023()
+    @include font-size(8)
+
+  @include bp-767()
+    @include font-size(7)
 
 teams-detail-players,
 teams-detail-fixtures
@@ -79,6 +101,12 @@ teams-detail-players
         padding: .5em
         border-top: 1px $color-global-lightliver solid
         border-bottom: 1px $color-global-lightliver solid
+
+        @include bp-1023()
+          @include font-size(7)
+
+        @include bp-767()
+          @include font-size(7)
 
 .teams-player__header
   background: $color-global-violetblue
@@ -131,9 +159,15 @@ teams-detail-players
   @include bp-1023()
     @include font-size(7)
 
+  @include bp-767()
+    @include font-size(7)
+
 .teams-player__cell--number
-  @include css3-prefix('flex', '0 0 4%')
+  @include css3-prefix('flex', '0 0 5%')
   text-align: right
+
+  @include bp-767()
+    @include css3-prefix('flex', '0 0 7%')
 
 .teams-player__cell--flag
   @include css3-prefix('flex', '0 0 7%')
@@ -141,8 +175,11 @@ teams-detail-players
   padding: 0 !important
 
 .teams-player__cell--name
-  @include css3-prefix('flex', '0 0 41%')
+  @include css3-prefix('flex', '0 0 40%')
   text-align: left
+
+  @include bp-767()
+    @include css3-prefix('flex', '0 0 78%')
 
 .teams-player__cell--age
   @include css3-prefix('flex', '0 0 8%')
@@ -157,6 +194,11 @@ teams-detail-players
   @include css3-prefix('flex', '0 0 19%')
   padding: .5em 1% .5em 0 !important
   text-align: right
+
+.teams-player__cell--contract,
+.teams-player__cell--market-value
+  @include bp-767()
+    display: none
 
 teams-detail-fixtures
   h4
@@ -236,6 +278,9 @@ teams-detail-fixtures
       @include bp-1023()
         @include font-size(6)
 
+      @include bp-767()
+        display: none
+
 .teams-fixture__cell
   @include css3-prefix('flex', '0 0 14%')
   @include css3-prefix('align-self', 'center')
@@ -249,20 +294,35 @@ teams-detail-fixtures
   @include bp-1023()
     @include font-size(7)
 
+  @include bp-767()
+    @include font-size(7)
+
 .teams-fixture__cell--matchday
   @include css3-prefix('flex', '0 0 9%')
+
+  @include bp-767()
+    display: none
 
 .teams-fixture__cell--date
   @include css3-prefix('flex', '0 0 20%')
   text-align: left
 
+  @include bp-767()
+    text-align: center
+
 .teams-fixture__cell--time
   @include css3-prefix('flex', '0 0 7%')
+
+  @include bp-767()
+    display: none
 
 .teams-fixture__cell--match
   @include css3-prefix('display', 'flex')
   @include css3-prefix('justify-content', 'center')
   @include css3-prefix('flex', '0 0 64%')
+
+  @include bp-767()
+    @include css3-prefix('flex', '0 0 80%')
 
 .teams-fixture__cell--match__team,
 .teams-fixture__cell--match__result,

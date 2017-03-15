@@ -26,8 +26,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppStore, InternalStateType } from './stores/app';
 import { SearchLeagueStore } from './stores/search-league';
 import { TeamsStore } from './stores/teams';
-import { NationalityEncoder } from './services/nationalityEncoder';
-import { KeysPipe } from './services/keysPipe';
+import { NationalityEncoder, KeysPipe, ScrollToY } from './services';
 import { HomeComponent } from './home';
 import { SearchLeagueComponent } from './search-league';
 import { TeamsStandingComponent } from './teams-standing';
@@ -47,7 +46,8 @@ const APP_PROVIDERS = [
   AppStore,
   SearchLeagueStore,
   TeamsStore,
-  NationalityEncoder
+  NationalityEncoder,
+  ScrollToY
 ];
 
 type StoreType = {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject }  from 'rxjs/Rx';
-import { NationalityEncoder }  from './../services/nationalityEncoder';
+import { NationalityEncoder }  from './../services';
 
 @Injectable()
 export class TeamsStore {

@@ -206,6 +206,7 @@ export class NationalityEncoder {
     'Senegal': 'SN',
     'Serbia and Montenegro': 'RS',
     'Serbia': 'RS',
+    'Montenegro': 'RS',
     'Seychelles': 'SC',
     'Sierra Leone': 'SL',
     'Singapore': 'SG',

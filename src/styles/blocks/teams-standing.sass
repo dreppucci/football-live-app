@@ -71,50 +71,61 @@
       @include bp-767()
         @include font-size(8)
 
-.teams-standing__header-cell--goals,
-.teams-standing__header-cell--wins,
-.teams-standing__header-cell--draws,
-.teams-standing__header-cell--losses,
-.teams-standing__header-cell--played
-  display: none
-  text-align: center
+  .teams-standing__cell
+    padding: 0
+    line-height: 1em
 
-.teams-standing__header-cell
+.teams-standing__cell
+  line-height: 30px
+  margin: 0
   @include css3-prefix('flex', '0 0 10%')
   @include css3-prefix('align-self', 'center')
+  padding: .5em 0
 
-.teams-standing__header-cell--position
-  @include css3-prefix('flex', '0 0 5%')
+.teams-standing__cell--position
+  text-align: right
+  color: $color-global-black
+  @include css3-prefix('flex', '0 0 9%')
 
-.teams-standing__header-cell--empty
-  @include css3-prefix('flex', '0 0 10%')
-
-.teams-standing__header-cell--name
-  @include css3-prefix('flex', '0 0 74%')
-
-.teams-standing__header-cell--pts
-  @include css3-prefix('flex', '0 0 10%')
-
-/* HEADER - FULL */
-.teams-standing__header--full
-  .teams-standing__header-cell--goals,
-  .teams-standing__header-cell--wins,
-  .teams-standing__header-cell--draws,
-  .teams-standing__header-cell--losses,
-  .teams-standing__header-cell--played
+.teams-standing__cell--image
+  img
     display: block
-    @include css3-prefix('flex', '0 0 8%')
+    max-width: 60%
+    max-height: 30px
+    margin: 0 auto
 
-  .teams-standing__header-cell--name
-    @include css3-prefix('flex', '0 0 40%')
-  .teams-standing__header-cell--pts
-    @include css3-prefix('flex', '0 0 5%')
+    @include bp-1024-landscape()
+      max-height: 24px
 
-  .teams-standing__header-cell--wins,
-  .teams-standing__header-cell--draws,
-  .teams-standing__header-cell--losses
     @include bp-767()
-      display: none
+      max-width: 60%
+      margin: 0 auto
+
+.teams-standing__cell--name
+  font-weight: bold
+  @include css3-prefix('flex', '0 0 70%')
+
+  a
+    display: block
+    color: $color-global-violetblue
+    text-decoration: none
+    @include transition(color .5s $transition-easing-easeInOutCirc)
+    cursor: pointer
+
+    &:hover
+      text-decoration: none
+      color: $color-global-black
+
+.teams-standing__cell--pts
+  @include css3-prefix('flex', '0 0 8%')
+
+.teams-standing__cell--goals,
+.teams-standing__cell--wins,
+.teams-standing__cell--draws,
+.teams-standing__cell--losses,
+.teams-standing__cell--played
+  display: none
+  text-align: center
 
 /* ROW */
 .teams-standing__row
@@ -127,7 +138,6 @@
 
     li
       @include font-size(9)
-      padding: .5em 0
 
       @include bp-1024-landscape()
         @include font-size(8)
@@ -161,78 +171,34 @@
         &:nth-child(8n+0)
           background: transparentize( $color-global-violetblue, .85)
 
-.teams-standing__row-cell--goals,
-.teams-standing__row-cell--wins,
-.teams-standing__row-cell--draws,
-.teams-standing__row-cell--losses,
-.teams-standing__row-cell--played
-  display: none
-  text-align: center
-
-.teams-standing__row-cell
-  line-height: 30px
-  margin: 0
-  @include css3-prefix('flex', '0 0 10%')
-
-.teams-standing__row-cell--position
-  text-align: right
-  color: $color-global-black
-  @include css3-prefix('flex', '0 0 5%')
-
-  @include bp-1024-landscape()
-    @include css3-prefix('flex', '0 0 7%')
-
-.teams-standing__row-cell--image
-
-  img
-    display: block
-    max-width: 30px
-    max-height: 30px
-    margin: 0 auto
-
-    @include bp-1024-landscape()
-      max-width: 100%
-      max-height: 24px
-
-.teams-standing__row-cell--name
-  font-weight: bold
-  @include css3-prefix('flex', '0 0 74%')
-
-  @include bp-1024-landscape()
-    @include css3-prefix('flex', '0 0 72%')
-
-  a
-    display: block
-    color: $color-global-violetblue
-    text-decoration: none
-    @include transition(color .5s $transition-easing-easeInOutCirc)
-    cursor: pointer
-
-    &:hover
-      text-decoration: none
-      color: $color-global-black
-
-/* ROW - FULL */
-.teams-standing__row--full
-  .teams-standing__row-cell--goals,
-  .teams-standing__row-cell--wins,
-  .teams-standing__row-cell--draws,
-  .teams-standing__row-cell--losses,
-  .teams-standing__row-cell--played
+/* FULL */
+.teams-standing__full
+  .teams-standing__cell--goals,
+  .teams-standing__cell--wins,
+  .teams-standing__cell--draws,
+  .teams-standing__cell--losses,
+  .teams-standing__cell--played
     display: block
     @include css3-prefix('flex', '0 0 8%')
+  
+  .teams-standing__cell--position
+    @include css3-prefix('flex', '0 0 6%')
 
-  .teams-standing__row-cell--name
-    @include css3-prefix('flex', '0 0 40%')
+  .teams-standing__cell--name
+    @include css3-prefix('flex', '0 0 39%')
 
-    @include bp-1024-landscape()
-      @include css3-prefix('flex', '0 0 38%')
+    @include bp-767()
+      @include css3-prefix('flex', '0 0 76%')
 
-  .teams-standing__row-cell--pts
+  .teams-standing__cell--pts
     @include css3-prefix('flex', '0 0 5%')
+  
+  .teams-standing__cell--goals,
+  .teams-standing__cell--played,
+  .teams-standing__cell--wins,
+  .teams-standing__cell--draws,
+  .teams-standing__cell--losses
+    display: block
 
-  .teams-standing__row-cell--wins,
-  .teams-standing__row-cell--draws,
-  .teams-standing__row-cell--losses
     @include bp-767()
       display: none

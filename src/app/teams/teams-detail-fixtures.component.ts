@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef,
   ElementRef, Input, HostBinding } from '@angular/core';
-
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable }  from 'rxjs/Rx';
 import { TeamsStore } from '../stores/teams';
 import { HttpClient } from '../services/http-client';
 import { TabAnimation } from '../animations';
@@ -16,6 +16,7 @@ export class TeamsDetailFixturesComponent implements AfterViewInit, OnDestroy {
 
   @Input() public data: Object;
   @Input('teamId') private teamId: number;
+  private width: number = window.outerWidth;
   private sub: any;
 
   constructor(
@@ -41,6 +42,7 @@ export class TeamsDetailFixturesComponent implements AfterViewInit, OnDestroy {
       });
 
     this.subscribeToStoreProperty();
+    this.updateWidthData();
   }
 
   public ngOnDestroy() {
@@ -53,6 +55,18 @@ export class TeamsDetailFixturesComponent implements AfterViewInit, OnDestroy {
         this.data = data;
         this.cdref.detectChanges();
       } );
+  }
+
+  private updateWidthData() {
+    const $resizeEvent = Observable.fromEvent(window, 'resize')
+      .map(() => {
+        return window.outerWidth;
+      })
+      .debounceTime(200);
+
+    $resizeEvent.subscribe( (data) => {
+      this.width = data;
+    });
   }
 
   private getData() {

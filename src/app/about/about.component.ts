@@ -8,7 +8,7 @@ import { RouteAnimation } from '../animations';
   animations: [RouteAnimation]
 })
 export class AboutComponent implements OnInit {
-  
+
   constructor() {
     console.clear();
   }
