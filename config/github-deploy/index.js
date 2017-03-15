@@ -24,7 +24,7 @@ function getRepoName(remoteName) {
       match = REPO_NAME_RE.exec(stdout);
 
   console.log('debug', stdout);
-  console.log('debug', math);
+  console.log('debug', match);
 
   if (!match) {
     throw new Error('Could not find a repository on remote ' + remoteName);

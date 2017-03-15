@@ -98,9 +98,7 @@ module.exports = function (options) {
                 sourceMap: false,
                 inlineSourceMap: true,
                 compilerOptions: {
-
-                  // Remove TypeScript helpers to be injected
-                  // below by DefinePlugin
+                  noImplicitAny: true,
                   removeComments: true
 
                 }
