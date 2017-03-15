@@ -1,7 +1,7 @@
 import { trigger, state, style, transition, animate } from '@angular/core';
 
 export const RouteAnimation = trigger('routeAnimation', [
-  state('*', style({transform: 'translateX(0)', opacity: 1})),
+  state('*', style({opacity: 1})),
   transition('void => *', [
     style({opacity: 0}),
     animate('0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000)')

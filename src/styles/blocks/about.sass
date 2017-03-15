@@ -1,0 +1,20 @@
+about
+  max-width: 600px
+  left: 50%
+  @include css3-prefix('transform', 'translate(-50%, 0) !important')
+
+  p
+    @include font-size(12)
+    margin: 0 0 2em
+    text-align: center
+    line-height: 1.4em
+
+  a
+    color: $color-global-violetblue
+    text-decoration: none
+    @include transition(color .5s $transition-easing-easeInOutCirc)
+    cursor: pointer
+
+    &:hover
+      text-decoration: none
+      color: $color-global-black

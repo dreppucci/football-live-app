@@ -1,4 +1,4 @@
-<h3>All leagues</h3>
+<h2>All leagues</h2>
 <div class="all-teams-standing__wrapper">
   <div *ngFor="let league of leagues" class="all-teams-standing__body"><teams-standing *ngIf="league.id != '424' && league.id != '432'" class="teams-standing__table" #standing1 [leagueId]="league.id" [fullData]="false">Loading...</teams-standing></div>
 </div>
