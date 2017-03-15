@@ -3,16 +3,29 @@
   @include css3-prefix('flex-direction', 'row')
   @include css3-prefix('flex-wrap', 'wrap')
 
+  @include bp-767()
+    @include css3-prefix('flex-direction', 'column')
+    @include css3-prefix('flex-wrap', 'nowrap')
+
 .all-teams-standing__body
   @include css3-prefix('flex', '0 0 30%')
   padding: 0 1.5%
 
+  @include bp-1023()
+    @include css3-prefix('flex', '0 0 47%')
+
+  @include bp-767()
+    @include css3-prefix('flex', '0 0 100%')
+
   &:empty
     display: none
 
+  teams-standing
+   @include clearfix()
+   display: block
+
 /* TABLE */
 .teams-standing__table
-  @include css3-prefix('flex', '0 0 30%')
   padding: 0 1.5%
 
   h3
@@ -48,6 +61,15 @@
       font-weight: bold
       @include font-size(9)
       color: $color-global-white
+
+      @include bp-1024-landscape()
+        @include font-size(8)
+
+      @include bp-1023()
+        @include font-size(8)
+
+      @include bp-767()
+        @include font-size(8)
 
 .teams-standing__header-cell--goals,
 .teams-standing__header-cell--wins,
@@ -88,6 +110,12 @@
   .teams-standing__header-cell--pts
     @include css3-prefix('flex', '0 0 5%')
 
+  .teams-standing__header-cell--wins,
+  .teams-standing__header-cell--draws,
+  .teams-standing__header-cell--losses
+    @include bp-767()
+      display: none
+
 /* ROW */
 .teams-standing__row
   background: $color-global-white
@@ -100,6 +128,15 @@
     li
       @include font-size(9)
       padding: .5em 0
+
+      @include bp-1024-landscape()
+        @include font-size(8)
+
+      @include bp-1023()
+        @include font-size(8)
+
+      @include bp-767()
+        @include font-size(8)
 
       &:nth-child(5n+0),
       &:nth-child(7n+0),
@@ -142,6 +179,9 @@
   color: $color-global-black
   @include css3-prefix('flex', '0 0 5%')
 
+  @include bp-1024-landscape()
+    @include css3-prefix('flex', '0 0 7%')
+
 .teams-standing__row-cell--image
 
   img
@@ -150,12 +190,16 @@
     max-height: 30px
     margin: 0 auto
 
-    &[src=null]
-      display: none
+    @include bp-1024-landscape()
+      max-width: 100%
+      max-height: 24px
 
 .teams-standing__row-cell--name
   font-weight: bold
   @include css3-prefix('flex', '0 0 74%')
+
+  @include bp-1024-landscape()
+    @include css3-prefix('flex', '0 0 72%')
 
   a
     display: block
@@ -180,5 +224,15 @@
 
   .teams-standing__row-cell--name
     @include css3-prefix('flex', '0 0 40%')
+
+    @include bp-1024-landscape()
+      @include css3-prefix('flex', '0 0 38%')
+
   .teams-standing__row-cell--pts
     @include css3-prefix('flex', '0 0 5%')
+
+  .teams-standing__row-cell--wins,
+  .teams-standing__row-cell--draws,
+  .teams-standing__row-cell--losses
+    @include bp-767()
+      display: none

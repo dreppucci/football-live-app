@@ -17,6 +17,12 @@
       cursor: pointer
       @include transition(color .5s $transition-easing-easeInOutCirc, background .5s $transition-easing-easeInOutCirc)
 
+      @include bp-1024-landscape()
+        @include font-size(9)
+        
+      @include bp-1023()
+        @include font-size(9)
+
       &:hover
         background: $color-global-sunglow
         color: $color-global-terracotta

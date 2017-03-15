@@ -7,6 +7,12 @@ header.header__main
   height: 60px
   z-index: 90
 
+  @include bp-1024-landscape()
+    height: 50px
+
+  @include bp-767()
+    height: 40px
+
 .header__wrapper
   @include clearfix()
   @include css3-prefix('display', 'flex')
@@ -24,6 +30,12 @@ header.header__main
       color: $color-global-white
       @include transition(color .5s $transition-easing-easeInOutCirc)
       cursor: pointer
+
+      @include bp-1024-landscape()
+        @include font-size(9)
+
+      @include bp-767()
+        @include font-size(8)
 
       &:hover,
       &.active
@@ -50,7 +62,7 @@ header.header__main
       width: 30px
 
     @include bp-767()
-      width: 30px
+      width: 22px
 
 .header__title
   color: $color-global-white
@@ -63,4 +75,4 @@ header.header__main
     @include font-size(14)
 
   @include bp-767()
-    @include font-size(14)
+    @include font-size(11)

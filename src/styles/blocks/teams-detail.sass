@@ -25,11 +25,24 @@ teams-detail-global
       @include font-size(16)
       line-height: 1em
       margin: 0 0 .2em
+
+      @include bp-1024-landscape()
+        @include font-size(16)
+        
+      @include bp-1023()
+        @include font-size(16)
+
     h5
       @include font-size(9)
       color: $color-global-darkliver
       line-height: 1em
       margin: 0 0 1em
+
+      @include bp-1024-landscape()
+        @include font-size(8)
+        
+      @include bp-1023()
+        @include font-size(8)
 
 .teams-details__info-marketvalue
   @include font-size(10)
@@ -111,6 +124,12 @@ teams-detail-players
   text-align: center
 
   @include font-size(9)
+  
+  @include bp-1024-landscape()
+    @include font-size(8)
+
+  @include bp-1023()
+    @include font-size(7)
 
 .teams-player__cell--number
   @include css3-prefix('flex', '0 0 4%')
@@ -211,12 +230,24 @@ teams-detail-fixtures
       position: absolute
       right: 2%
 
+      @include bp-1024-landscape()
+        @include font-size(6)
+        
+      @include bp-1023()
+        @include font-size(6)
+
 .teams-fixture__cell
   @include css3-prefix('flex', '0 0 14%')
   @include css3-prefix('align-self', 'center')
   text-align: center
 
   @include font-size(9)
+
+  @include bp-1024-landscape()
+    @include font-size(8)
+    
+  @include bp-1023()
+    @include font-size(7)
 
 .teams-fixture__cell--matchday
   @include css3-prefix('flex', '0 0 9%')

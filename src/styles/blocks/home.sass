@@ -5,7 +5,21 @@ home
     text-align: center
     line-height: 1em
 
+    @include bp-1024-landscape()
+      @include font-size(14)
+
+    @include bp-767()
+      @include font-size(10)
+
 .top-three-standings__wrapper
   @include css3-prefix('display', 'flex')
   @include css3-prefix('flex-direction', 'row')
   @include css3-prefix('flex-wrap', 'wrap')
+
+  @include bp-1023()
+    @include css3-prefix('flex-direction', 'column')
+    @include css3-prefix('flex-wrap', 'nowrap')
+
+  @include bp-767()
+    @include css3-prefix('flex-direction', 'column')
+    @include css3-prefix('flex-wrap', 'nowrap')
