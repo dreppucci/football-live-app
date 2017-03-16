@@ -1,19 +1,19 @@
 /**
  * @author: @AngularClass
  */
-const fs = require('fs');
-const path = require('path');
-const helpers = require('./helpers');
-const ghDeploy = require('./github-deploy');
-const webpackMerge = require('webpack-merge'); // used to merge webpack configs
+ const fs = require('fs');
+ const path = require('path');
+ const helpers = require('./helpers');
+ const ghDeploy = require('./github-deploy');
+ const webpackMerge = require('webpack-merge');
 
 /**
  * Webpack Constants
  */
-const GIT_REMOTE_NAME = 'origin';
-const GIT_REPO = 'https://github.com/dreppucci/football-live-app.git';
-const COMMIT_MESSAGE = 'Deployment on github pages';
-const GIT_REPO_SHORT_NAME = 'football-live-app';
+ const GIT_REMOTE_NAME = 'origin';
+ const GIT_REPO = 'https://github.com/dreppucci/football-live-app.git';
+ const COMMIT_MESSAGE = 'Deployment on github pages';
+ const GIT_REPO_SHORT_NAME = 'football-live-app';
 //const GH_REPO_NAME = ghDeploy.getRepoName(GIT_REPO);
 
 module.exports = function (options) {
@@ -39,23 +39,23 @@ module.exports = function (options) {
       * Prefixing so every resource will be absolute (otherwise it will be url.com/repoName/repoName...
       * Suffixing since chunks will not do it automatically (testes against about page)
       */
-     publicPath: '/' + GIT_REPO_SHORT_NAME + '/' + ghDeploy.safeUrl(webpackConfig.output.publicPath)
-   },
+      publicPath: '/' + GIT_REPO_SHORT_NAME + '/' + ghDeploy.safeUrl(webpackConfig.output.publicPath)
+    },
 
-   plugins: [
-     function() {
-       this.plugin('done', function(stats) {
-         console.log('Starting deployment to GitHub.');
+    plugins: [
+    function() {
+     this.plugin('done', function(stats) {
+       console.log('Starting deployment to GitHub.');
 
-         const logger = function (msg) {
-           console.log(msg);
-         };
+       const logger = function (msg) {
+         console.log(msg);
+       };
 
-         const options = {
-           logger: logger,
-           remote: GIT_REMOTE_NAME,
-           message: COMMIT_MESSAGE,
-           repo: GIT_REPO,
+       const options = {
+         logger: logger,
+         remote: GIT_REMOTE_NAME,
+         message: COMMIT_MESSAGE,
+         repo: GIT_REPO,
            dotfiles: true // for .nojekyll
          };
 
@@ -66,6 +66,12 @@ module.exports = function (options) {
          fs.writeFileSync(path.join(webpackConfig.output.path, '.nojekyll'), '');
 
          const ghpages = require('gh-pages');
+         const gitConfig = require('git-config');
+
+         gitConfig('.gitconfig', function(err, config) {
+          console.log(err);
+          console.log(config);
+         });
 
          ghpages.publish(webpackConfig.output.path, options, function(err) {
            if (err) {
@@ -77,7 +83,7 @@ module.exports = function (options) {
            }
          });
        });
-     }
+   }
    ]
  });
 };

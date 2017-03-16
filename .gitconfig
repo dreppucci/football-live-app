@@ -1,0 +1,15 @@
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[gui]
+  fontdiff = -family \"Lucida Console\" -size 11 -weight normal -slant roman -underline 0 -overstrike 0
+[user]
+  name = Davide Reppucci
+  email = davide.reppucci@gmail.com
+[branch]
+  autosetuprebase = always
+[push]
+  default = tracking
+[github]
+  user = dreppucci
