@@ -26,11 +26,6 @@ const ngcWebpack = require('ngc-webpack');
  */
 const HMR = helpers.hasProcessFlag('hot');
 const AOT = helpers.hasNpmFlag('aot');
-const METADATA = {
-  title: 'Football Live App',
-  baseUrl: '/',
-  isDevServer: helpers.isWebpackDevServer()
-};
 
 /*
  * Webpack configuration
@@ -39,6 +34,11 @@ const METADATA = {
  */
 module.exports = function (options) {
   isProd = options.env === 'production';
+  const METADATA = {
+    title: 'Football Live App',
+    baseUrl: isProd ? 'https://dreppucci.github.io/football-live-app/' : '/',
+    isDevServer: helpers.isWebpackDevServer()
+  };
   return {
 
     /*

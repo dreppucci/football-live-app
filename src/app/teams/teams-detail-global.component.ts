@@ -14,6 +14,7 @@ export class TeamsDetailGlobalComponent implements AfterViewInit, OnChanges, OnD
 
   @Input() public data: Object;
   @Input('teamId') private teamId: number;
+  private imgFallback = require('../../assets/gfx/lgo.svg');
 
   constructor(
     public route: ActivatedRoute,

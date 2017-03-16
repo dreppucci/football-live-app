@@ -15,6 +15,7 @@ export class TeamsStandingComponent implements AfterViewInit {
   @Input() private teams: Object;
   @Input('leagueId') private leagueId: string;
   @Input('fullData') private fullData: string;
+  private imgFallback = require('../../assets/gfx/lgo.svg');
 
   constructor(
     public route: ActivatedRoute,

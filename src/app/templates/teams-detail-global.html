@@ -1,5 +1,5 @@
 <figure *ngIf="data">
-  <img data-preload="true" [src]="data.crestUrl" src-fallback="../../assets/gfx/lgo.svg" alt="{{data?.name}}" title="{{data?.name}}" />
+  <img data-preload="true" [src]="data.crestUrl" [src-fallback]="imgFallback" alt="{{data?.name}}" title="{{data?.name}}" />
 </figure>
 <div class="team-detail__infos">
   <h4>{{data?.name}}</h4>
