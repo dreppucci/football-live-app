@@ -5,7 +5,7 @@ const helpers = require('../helpers');
 
 const REPO_NAME_RE = /Push {2}URL: ((git@github\.com:)|(https:\/\/github\.com\/)).+\/(.+)\.git/;
 
-getRepoName('https://github.com/dreppucci/football-live-app.git');
+//getRepoName('https://github.com/dreppucci/football-live-app.git');
 
 function getWebpackConfigModule(options) {
   if (options.githubDev) {

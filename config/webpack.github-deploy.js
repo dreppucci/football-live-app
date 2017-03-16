@@ -13,6 +13,7 @@ const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 const GIT_REMOTE_NAME = 'origin';
 const GIT_REPO = 'https://github.com/dreppucci/football-live-app.git';
 const COMMIT_MESSAGE = 'Deployment on github pages';
+const GIT_REPO_SHORT_NAME = 'football-live-app';
 const GH_REPO_NAME = ghDeploy.getRepoName(GIT_REPO);
 
 module.exports = function (options) {
@@ -21,7 +22,7 @@ module.exports = function (options) {
   const webpackConfig = webpackConfigFactory(options);
 
   // replace the instance of HtmlWebpackPlugin with an updated one.
-  ghDeploy.replaceHtmlWebpackPlugin(webpackConfig.plugins, GH_REPO_NAME);
+  ghDeploy.replaceHtmlWebpackPlugin(webpackConfig.plugins, GIT_REPO_SHORT_NAME);
 
   return webpackMerge(webpackConfig, {
    output: {
@@ -38,7 +39,7 @@ module.exports = function (options) {
       * Prefixing so every resource will be absolute (otherwise it will be url.com/repoName/repoName...
       * Suffixing since chunks will not do it automatically (testes against about page)
       */
-     publicPath: '/' + GH_REPO_NAME + '/' + ghDeploy.safeUrl(webpackConfig.output.publicPath)
+     publicPath: '/' + GIT_REPO_SHORT_NAME + '/' + ghDeploy.safeUrl(webpackConfig.output.publicPath)
    },
 
    plugins: [
