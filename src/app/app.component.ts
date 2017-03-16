@@ -5,6 +5,8 @@ import { AppStore } from './stores/app';
 import { HttpClient } from './services/http-client';
 import { ScrollToY }  from './services';
 
+declare const ga:Function;
+
 @Component({
   selector: 'app',
   providers: [HttpClient, CacheService, {provide: CacheStorageAbstract, useClass:CacheLocalStorage} ],
@@ -25,11 +27,16 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
+    this.loadGA();
+
     this.router.events.subscribe((evt) => {
       if ( !( evt instanceof NavigationEnd ) ) {
         return;
       }
       this.scroller.scrollToY(0, 1500);
+
+      ga('set', 'page', evt.url);
+      ga('send', 'pageview');
     });
 
     if ( !this.cacheService.exists('leagues') ) {
@@ -70,6 +77,16 @@ export class AppComponent implements OnInit {
         });
 
     });
+  }
+
+  private loadGA() {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-73037711-3', 'auto');
+    ga('send', 'pageview');
   }
 
 }
