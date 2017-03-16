@@ -14,7 +14,7 @@ const GIT_REMOTE_NAME = 'origin';
 const GIT_REPO = 'https://github.com/dreppucci/football-live-app.git';
 const COMMIT_MESSAGE = 'Deployment on github pages';
 const GIT_REPO_SHORT_NAME = 'football-live-app';
-const GH_REPO_NAME = ghDeploy.getRepoName(GIT_REPO);
+//const GH_REPO_NAME = ghDeploy.getRepoName(GIT_REPO);
 
 module.exports = function (options) {
 
