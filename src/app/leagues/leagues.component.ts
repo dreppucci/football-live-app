@@ -1,14 +1,13 @@
 import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef,
   ElementRef, Input, HostBinding } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
+import { CacheService, CacheStorageAbstract, CacheLocalStorage } from 'ng2-cache/ng2-cache';
 import { AppStore } from '../stores/app';
-import { HttpClient } from '../services/http-client';
 import { RouteAnimation } from '../animations';
 
 @Component({
   selector: 'leagues',
-  providers: [HttpClient],
+  providers: [ CacheService, {provide: CacheStorageAbstract, useClass:CacheLocalStorage} ],
   templateUrl: '../templates/leagues.html',
   animations: [RouteAnimation]
 })
@@ -21,7 +20,7 @@ export class LeaguesComponent implements OnInit, OnDestroy {
     public appStore: AppStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
-    private http: HttpClient
+    private cacheService: CacheService
   ) {
     console.clear();
   }
@@ -29,45 +28,26 @@ export class LeaguesComponent implements OnInit, OnDestroy {
   @HostBinding('@routeAnimation')
 
   public ngOnInit() {
-    this.getLeaguesData();
+    if ( !this.cacheService.exists('leagues') ) {
+      this.getData();
+    } else {
+      this.saveLeaguesData( this.cacheService.get('leagues') );
+    }
   }
 
   public ngOnDestroy () {
     this.cdref.detach();
   }
 
-  private getLeaguesData() {
-    if ( this.appStore.get('leagues') === undefined ) {
-      this.getData();
-      // this.asyncMockedData();
-
-    } else {
-      this.saveLeaguesData( this.appStore.get('leagues') );
-    }
-  }
-
   private getData() {
-    this.http.get('competitions')
-      .subscribe(
-        (data: any) => this.saveLeaguesData(data.json()),
-        (error) => console.log(error)
+    this.appStore.leagues.subscribe(
+      (data: any) => this.saveLeaguesData( data.json() ),
+      (error) => console.log(error)
     );
   }
 
   private saveLeaguesData(data: Object) {
-    this.appStore.set('leagues', data);
     this.leagues = this.appStore.get('leagues');
-  }
-
-  private asyncMockedData() {
-
-    setTimeout(() => {
-      System.import('../../assets/mock-data/competitions.json')
-        .then((data) => {
-          this.saveLeaguesData( data );
-        });
-
-    });
   }
 
 }

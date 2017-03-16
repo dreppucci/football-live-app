@@ -49,6 +49,7 @@ search-league
   max-height: 100px
   overflow: hidden
   overflow-y: auto
+  border-bottom: 1px $color-global-darkliver solid
 
   @include bp-1024-landscape()
     top: 31px
@@ -84,10 +85,6 @@ search-league
 
     &:nth-child(odd)
       background: $color-global-light-violetblue
-
-    &:last-child
-      a
-        border-bottom: 1px $color-global-darkliver solid
 
     &:empty
       display: none

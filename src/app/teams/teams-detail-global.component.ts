@@ -1,13 +1,13 @@
 import { Component, AfterViewInit, OnChanges, OnDestroy, NgZone,
   ChangeDetectorRef, ElementRef, Input } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
+import { CacheService, CacheStorageAbstract, CacheLocalStorage } from 'ng2-cache/ng2-cache';
 import { TeamsStore } from '../stores/teams';
 import { HttpClient } from '../services/http-client';
 
 @Component({
   selector: 'teams-detail-global',
-  providers: [HttpClient, TeamsStore],
+  providers: [HttpClient, TeamsStore, {provide: CacheStorageAbstract, useClass:CacheLocalStorage}],
   templateUrl: '../templates/teams-detail-global.html'
 })
 export class TeamsDetailGlobalComponent implements AfterViewInit, OnChanges, OnDestroy {
@@ -21,7 +21,8 @@ export class TeamsDetailGlobalComponent implements AfterViewInit, OnChanges, OnD
     private teamsStore: TeamsStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
-    private http: HttpClient
+    private http: HttpClient,
+    private cacheService: CacheService
   ) {
     console.clear();
   }
@@ -29,12 +30,23 @@ export class TeamsDetailGlobalComponent implements AfterViewInit, OnChanges, OnD
   public ngAfterViewInit () {
     this.subscribeToStoreProperty();
 
-    this.getData();
-    // this.asyncMockedData();
+    if ( !this.cacheService.exists( 'team-' + this.teamId + '-global' ) ) {
+      this.getData();
+      // this.asyncMockedData();
+    } else {
+      this.data = this.cacheService.get( 'team-' + this.teamId + '-global' );
+    }
   }
 
   public ngOnChanges() {
-    this.getData();
+    this.subscribeToStoreProperty();
+
+    if ( !this.cacheService.exists( 'team-' + this.teamId + '-global' ) ) {
+      this.getData();
+      // this.asyncMockedData();
+    } else {
+      this.data = this.cacheService.get( 'team-' + this.teamId + '-global' );
+    }
   }
 
   public ngOnDestroy() {
@@ -45,6 +57,9 @@ export class TeamsDetailGlobalComponent implements AfterViewInit, OnChanges, OnD
     this.teamsStore.teamInfo
       .subscribe( (data) => {
         this.data = data;
+        if ( !this.cacheService.exists( 'team-' + this.teamId + '-global' ) ) {
+          this.cacheService.set('team-' + this.teamId + '-global', this.data, { expires: Date.now() + 1000 * 60 * 60 });
+        }
         this.cdref.detectChanges();
       } );
   }

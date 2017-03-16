@@ -1,10 +1,9 @@
 import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef,
   ViewChild, ElementRef, Input } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
+import { CacheService, CacheStorageAbstract, CacheLocalStorage } from 'ng2-cache/ng2-cache';
 import { AppStore } from '../stores/app';
 import { SearchLeagueStore } from '../stores/search-league';
-import { HttpClient } from '../services/http-client';
 import { Observable }  from 'rxjs/Rx';
 
 import 'rxjs/add/operator/debounceTime';
@@ -13,7 +12,7 @@ import 'rxjs/add/observable/fromEvent';
 
 @Component({
   selector: 'search-league',
-  providers: [HttpClient],
+  providers: [ CacheService, {provide: CacheStorageAbstract, useClass:CacheLocalStorage} ],
   templateUrl: '../templates/search-league.html'
 })
 export class SearchLeagueComponent implements AfterViewInit, OnDestroy {
@@ -28,7 +27,7 @@ export class SearchLeagueComponent implements AfterViewInit, OnDestroy {
     public searchLeagueStore: SearchLeagueStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
-    private http: HttpClient
+    private cacheService: CacheService
   ) {
     console.clear();
   }
@@ -48,7 +47,11 @@ export class SearchLeagueComponent implements AfterViewInit, OnDestroy {
         this.cdref.detectChanges();
       } );
 
-    this.getLeaguesData();
+    if ( !this.cacheService.exists('leagues') ) {
+      this.getData();
+    } else {
+      this.searchLeagueStore.saveLeaguesList( this.cacheService.get('leagues') );
+    }
 
   }
 
@@ -60,35 +63,15 @@ export class SearchLeagueComponent implements AfterViewInit, OnDestroy {
     this.searchLeagueStore.updateLeaguesList( this.localState.leagueSearching );
   }
 
-  private getLeaguesData() {
-    if ( this.appStore.get( 'leagues' ) === undefined ) {
-      this.http.get( 'competitions' )
-        .subscribe(
-          (data: any) => this.saveLeaguesData(data.json()),
-          (error) => console.log(error)
-      );
-
-      // this.asyncMockedData();
-
-    } else {
-      this.saveLeaguesData( this.appStore.get('leagues') );
-    }
+  private getData() {
+    this.appStore.leagues.subscribe(
+      (data: any) => this.saveLeaguesData( data.json() ),
+      (error) => console.log(error)
+    );
   }
 
   private saveLeaguesData(data: Object) {
     this.searchLeagueStore.saveLeaguesList(data);
-    this.appStore.set('leagues', data);
-  }
-
-  private asyncMockedData() {
-    setTimeout(() => {
-
-      System.import('../../assets/mock-data/competitions.json')
-        .then((data) => {
-          this.saveLeaguesData( data );
-        });
-
-    });
   }
 
 }

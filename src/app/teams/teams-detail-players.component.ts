@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef,
   ElementRef, Input, HostBinding } from '@angular/core';
-
 import { ActivatedRoute, Router } from '@angular/router';
+import { CacheService, CacheStorageAbstract, CacheLocalStorage } from 'ng2-cache/ng2-cache';
 import { TeamsStore } from '../stores/teams';
 import { HttpClient } from '../services/http-client';
 import { OrderBy } from '../services/orderBy';
@@ -9,13 +9,13 @@ import { TabAnimation } from '../animations';
 
 @Component({
   selector: 'teams-detail-players',
-  providers: [HttpClient, TeamsStore],
+  providers: [HttpClient, TeamsStore, {provide: CacheStorageAbstract, useClass:CacheLocalStorage}],
   templateUrl: '../templates/teams-detail-players.html',
   animations: [TabAnimation]
 })
 export class TeamsDetailPlayersComponent implements AfterViewInit, OnDestroy {
 
-  public playersGroup: Object = [];
+  public playersGroup: Object = {};
   @Input() public data: Object;
   @Input('teamId') private teamId: number;
   private sub: any;
@@ -26,7 +26,8 @@ export class TeamsDetailPlayersComponent implements AfterViewInit, OnDestroy {
     private teamsStore: TeamsStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
-    private http: HttpClient
+    private http: HttpClient,
+    private cacheService: CacheService
   ) {
     console.clear();
   }
@@ -38,8 +39,12 @@ export class TeamsDetailPlayersComponent implements AfterViewInit, OnDestroy {
       .params.subscribe( (params) => {
         this.teamId = +params['id'];
 
-        this.getData();
-        // this.asyncMockedData();
+        if ( !this.cacheService.exists( 'team-' + this.teamId + '-players' ) ) {
+          this.getData();
+          // this.asyncMockedData();
+        } else {
+          this.data = this.cacheService.get( 'team-' + this.teamId + '-players' );
+        }
       });
 
     this.subscribeToStoreProperty();
@@ -71,14 +76,18 @@ export class TeamsDetailPlayersComponent implements AfterViewInit, OnDestroy {
 
         if (!this.playersGroup[positionName]) {
           this.playersGroup[positionName] = [];
-          this.playersGroup[positionName].name = positionName;
           this.playersGroup[positionName].push( player );
         } else {
           this.playersGroup[positionName].push( player );
         }
       } );
+    
     this.data = this.playersGroup;
     this.data.count = data.count;
+
+    if ( !this.cacheService.exists( 'team-' + this.teamId + '-players' ) ) {
+      this.cacheService.set('team-' + this.teamId + '-players', this.data, { expires: Date.now() + 1000 * 60 * 60 });
+    }
     this.cdref.detectChanges();
   }
 

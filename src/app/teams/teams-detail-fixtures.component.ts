@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef,
   ElementRef, Input, HostBinding } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CacheService, CacheStorageAbstract, CacheLocalStorage } from 'ng2-cache/ng2-cache';
 import { Observable }  from 'rxjs/Rx';
 import { TeamsStore } from '../stores/teams';
 import { HttpClient } from '../services/http-client';
@@ -8,7 +9,7 @@ import { TabAnimation } from '../animations';
 
 @Component({
   selector: 'teams-detail-fixtures',
-  providers: [HttpClient, TeamsStore],
+  providers: [HttpClient, TeamsStore, {provide: CacheStorageAbstract, useClass:CacheLocalStorage}],
   templateUrl: '../templates/teams-detail-fixtures.html',
   animations: [TabAnimation]
 })
@@ -25,7 +26,8 @@ export class TeamsDetailFixturesComponent implements AfterViewInit, OnDestroy {
     private teamsStore: TeamsStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
-    private http: HttpClient
+    private http: HttpClient,
+    private cacheService: CacheService
   ) {
     console.clear();
   }
@@ -37,8 +39,12 @@ export class TeamsDetailFixturesComponent implements AfterViewInit, OnDestroy {
       .params.subscribe( (params) => {
         this.teamId = +params['id'];
 
-        this.getData();
-        // this.asyncMockedData();
+        if ( !this.cacheService.exists( 'team-' + this.teamId + '-fixtures' ) ) {
+          this.getData();
+          // this.asyncMockedData();
+        } else {
+          this.data = this.cacheService.get( 'team-' + this.teamId + '-fixtures' );
+        }
       });
 
     this.subscribeToStoreProperty();
@@ -53,6 +59,11 @@ export class TeamsDetailFixturesComponent implements AfterViewInit, OnDestroy {
     this.teamsStore.teamFixtures
       .subscribe( (data) => {
         this.data = data;
+
+        if ( !this.cacheService.exists( 'team-' + this.teamId + '-fixtures' ) ) {
+          this.cacheService.set('team-' + this.teamId + '-fixtures', this.data, { expires: Date.now() + 1000 * 60 * 60 });
+        }
+
         this.cdref.detectChanges();
       } );
   }
