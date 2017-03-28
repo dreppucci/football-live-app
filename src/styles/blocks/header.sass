@@ -45,6 +45,9 @@ header.header__main
         cursor: default
 
 .header__logo
+  @include css3-prefix('display', 'flex')
+  @include css3-prefix('flew-flow', 'row nowrap')
+  @include css3-prefix('align-self', 'center')
   a
     @include css3-prefix('display', 'flex')
     @include css3-prefix('flew-flow', 'row nowrap')
@@ -57,6 +60,7 @@ header.header__main
     height: 100%
     fill: $color-global-white
     margin-right: 1em
+    @include css3-prefix('align-self', 'center')
 
     @include bp-1024-landscape()
       width: 30px

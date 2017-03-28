@@ -14,6 +14,7 @@ export class DefaultImageDirective implements OnDestroy {
 
   constructor(el: ElementRef) {
     this.el = el.nativeElement;
+    this.el.className = '';
     this.el.addEventListener(this.ERROR_EVENT_TYPE, this.onError.bind(this));
     this.el.addEventListener(this.LOAD_EVENT_TYPE, this.onLoad.bind(this));
   }
@@ -36,7 +37,7 @@ export class DefaultImageDirective implements OnDestroy {
 
   private onLoad() {
     this.loaded.emit(this.isApplied);
-    this.el.className += 'is-loaded';
+    this.el.className = 'is-loaded';
   }
 
   private removeErrorEvent() {
