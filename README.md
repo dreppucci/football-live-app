@@ -12,4 +12,5 @@ _v 0.1.0_
 ![](https://www.google-analytics.com/collect?v=1&_v=j49&a=123146132&t=pageview&_s=4&dl=https://github.com/dreppucci/football-live-app&ul=en-us&de=UTF-8&dt=Football%20Live%20App&tid=UA-73037711-3)
 
 <h2 style="border: none; text-align: center">Offer me a beer! =)</h2>
+<p>If you like this project or if you'd like to support me and my side-projects, feel free to offer me a beer (just 1€) by clicking the image below.</p>
 <a href="https://www.paypal.me/drep/1" target="_blank" style="display: block;"><img style="margin: 0 auto; display: block" src="http://fullmoonbrewwork.com.rsz.io/wp-content/uploads/2014/06/FMBW_Beers_Phuket-Lager-300x300.png?width=150" /></a>
