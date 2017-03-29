@@ -161,6 +161,10 @@ teams-detail-players
 
   @include bp-767()
     @include font-size(7)
+  
+  &:empty
+    background: none
+    padding: 0 !important
 
 .teams-player__cell--number
   @include css3-prefix('flex', '0 0 5%')

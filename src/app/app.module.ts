@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { Http, HttpModule, RequestOptions, XHRBackend, ConnectionBackend } from '@angular/http';
 import {
   NgModule,
   ApplicationRef
@@ -23,6 +23,7 @@ import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
+import { HttpService, ApiService } from './services';
 import { AppStore, InternalStateType } from './stores/app';
 import { SearchLeagueStore } from './stores/search-league';
 import { TeamsStore } from './stores/teams';
@@ -47,7 +48,15 @@ const APP_PROVIDERS = [
   SearchLeagueStore,
   TeamsStore,
   NationalityEncoder,
-  ScrollToY
+  ScrollToY,
+  ConnectionBackend,
+  { provide: Http,
+    useFactory: (backend: XHRBackend, options: RequestOptions) => {
+      return new HttpService(backend, options);
+    },
+    deps: [XHRBackend, RequestOptions]
+  },
+  ApiService
 ];
 
 type StoreType = {
@@ -79,13 +88,13 @@ type StoreType = {
     KeysPipe,
     DefaultImageDirective
   ],
-  imports: [ // import Angular's modules
+  imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
-  providers: [ // expose our Services and Providers into Angular's dependency injection
+  providers: [
     ENV_PROVIDERS,
     APP_PROVIDERS
   ],

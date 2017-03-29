@@ -151,3 +151,35 @@ img[data-preload="true"]
 
 [placeholder]:focus::-webkit-input-placeholder
   color: transparent
+
+#loading:not(:required)
+  background: rgba( $color-global-black, .5)
+  display: none
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 9999
+
+  &:before
+    content: ""
+    display: block
+    position: absolute
+    top: 50%
+    left: 50%
+    width: 50px
+    height: 50px
+    @include css3-prefix('transform', '-50% -50%')
+    @include animation(pulse-loader .7s linear infinite alternate )
+    @include css3-prefix('box-shadow', 'inset 0 0 0 #{$color-global-sunglow}')
+    @include border-radius(50%)
+    overflow: hidden
+
+@include keyframes(pulse-loader)
+  0%
+    @include css3-prefix('box-shadow', 'inset 0 0 20px #{$color-global-sunglow}')
+  40%
+    @include css3-prefix('box-shadow', 'inset 0 0 5px #{$color-global-sunglow}')
+  100%
+    @include css3-prefix('box-shadow', 'inset 0 0 10px #{$color-global-sunglow}')

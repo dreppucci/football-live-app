@@ -2,14 +2,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CacheService, CacheStorageAbstract, CacheLocalStorage } from 'ng2-cache/ng2-cache';
 import { AppStore } from './stores/app';
-import { HttpClient } from './services/http-client';
-import { ScrollToY }  from './services';
+import { ApiService, ScrollToY } from './services';
 
-declare const ga:Function;
+declare const ga: Function;
 
 @Component({
   selector: 'app',
-  providers: [HttpClient, CacheService, {provide: CacheStorageAbstract, useClass:CacheLocalStorage} ],
+  providers: [CacheService, {provide: CacheStorageAbstract, useClass: CacheLocalStorage} ],
   encapsulation: ViewEncapsulation.None,
   templateUrl: 'templates/app.html'
 })
@@ -20,8 +19,8 @@ export class AppComponent implements OnInit {
     public appStore: AppStore,
     public router: Router,
     public scroller: ScrollToY,
-    private http: HttpClient,
-    private cacheService: CacheService
+    private cacheService: CacheService,
+    private apiService: ApiService
   ) {
     console.clear();
   }
@@ -49,7 +48,7 @@ export class AppComponent implements OnInit {
   }
 
   private getCompetitionsData() {
-    this.appStore.leagues = this.http.get( 'competitions' )
+    this.appStore.leagues = this.apiService.getUrl( 'competitions' )
       .publishReplay(1)
       .refCount()
       .share();

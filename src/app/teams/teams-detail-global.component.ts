@@ -3,11 +3,11 @@ import { Component, AfterViewInit, OnChanges, OnDestroy, NgZone,
 import { ActivatedRoute } from '@angular/router';
 import { CacheService, CacheStorageAbstract, CacheLocalStorage } from 'ng2-cache/ng2-cache';
 import { TeamsStore } from '../stores/teams';
-import { HttpClient } from '../services/http-client';
+import { ApiService } from '../services';
 
 @Component({
   selector: 'teams-detail-global',
-  providers: [HttpClient, TeamsStore, {provide: CacheStorageAbstract, useClass:CacheLocalStorage}],
+  providers: [TeamsStore, {provide: CacheStorageAbstract, useClass: CacheLocalStorage}],
   templateUrl: '../templates/teams-detail-global.html'
 })
 export class TeamsDetailGlobalComponent implements AfterViewInit, OnChanges, OnDestroy {
@@ -21,7 +21,7 @@ export class TeamsDetailGlobalComponent implements AfterViewInit, OnChanges, OnD
     private teamsStore: TeamsStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
-    private http: HttpClient,
+    private apiService: ApiService,
     private cacheService: CacheService
   ) {
     console.clear();
@@ -58,14 +58,15 @@ export class TeamsDetailGlobalComponent implements AfterViewInit, OnChanges, OnD
       .subscribe( (data) => {
         this.data = data;
         if ( !this.cacheService.exists( 'team-' + this.teamId + '-global' ) ) {
-          this.cacheService.set('team-' + this.teamId + '-global', this.data, { expires: Date.now() + 1000 * 60 * 60 });
+          this.cacheService.set('team-' + this.teamId + '-global',
+            this.data, { expires: Date.now() + 1000 * 60 * 60 });
         }
         this.cdref.detectChanges();
       } );
   }
 
   private getData() {
-    this.http.get(`teams/${this.teamId}`)
+    this.apiService.getUrl(`teams/${this.teamId}`)
       .subscribe(
         (data: any) => this.teamsStore.showGlobal(data.json()),
         (error) => console.log(error)

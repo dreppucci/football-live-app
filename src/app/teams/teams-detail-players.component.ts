@@ -3,13 +3,13 @@ import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef,
 import { ActivatedRoute, Router } from '@angular/router';
 import { CacheService, CacheStorageAbstract, CacheLocalStorage } from 'ng2-cache/ng2-cache';
 import { TeamsStore } from '../stores/teams';
-import { HttpClient } from '../services/http-client';
+import { ApiService } from '../services';
 import { OrderBy } from '../services/orderBy';
 import { TabAnimation } from '../animations';
 
 @Component({
   selector: 'teams-detail-players',
-  providers: [HttpClient, TeamsStore, {provide: CacheStorageAbstract, useClass:CacheLocalStorage}],
+  providers: [ApiService, TeamsStore, {provide: CacheStorageAbstract, useClass: CacheLocalStorage}],
   templateUrl: '../templates/teams-detail-players.html',
   animations: [TabAnimation]
 })
@@ -26,7 +26,7 @@ export class TeamsDetailPlayersComponent implements AfterViewInit, OnDestroy {
     private teamsStore: TeamsStore,
     private ngzone: NgZone,
     private cdref: ChangeDetectorRef,
-    private http: HttpClient,
+    private apiService: ApiService,
     private cacheService: CacheService
   ) {
     console.clear();
@@ -62,7 +62,7 @@ export class TeamsDetailPlayersComponent implements AfterViewInit, OnDestroy {
   }
 
   private getData() {
-    this.http.get(`teams/${this.teamId}/players`)
+    this.apiService.getUrl(`teams/${this.teamId}/players`)
       .subscribe(
         (data: any) => this.teamsStore.showPlayers(data.json()),
         (error) => console.log(error)
@@ -81,12 +81,13 @@ export class TeamsDetailPlayersComponent implements AfterViewInit, OnDestroy {
           this.playersGroup[positionName].push( player );
         }
       } );
-    
+
     this.data = this.playersGroup;
     this.data.count = data.count;
 
     if ( !this.cacheService.exists( 'team-' + this.teamId + '-players' ) ) {
-      this.cacheService.set('team-' + this.teamId + '-players', this.data, { expires: Date.now() + 1000 * 60 * 60 });
+      this.cacheService.set('team-' + this.teamId + '-players',
+        this.data, { expires: Date.now() + 1000 * 60 * 60 });
     }
     this.cdref.detectChanges();
   }

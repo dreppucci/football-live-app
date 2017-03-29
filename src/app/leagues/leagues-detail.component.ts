@@ -2,11 +2,9 @@ import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef,
   ElementRef, Input, HostBinding, animate, state, style, transition, trigger } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '../services/http-client';
 
 @Component({
   selector: 'leagues-detail',
-  providers: [HttpClient],
   templateUrl: '../templates/leagues-detail.html',
   styles: [':host { width: 100%; display: block; position: absolute; }'],
   animations: [
@@ -30,8 +28,7 @@ export class LeaguesDetailComponent implements OnInit, OnDestroy {
   constructor(
     public route: ActivatedRoute,
     private ngzone: NgZone,
-    private cdref: ChangeDetectorRef,
-    private http: HttpClient
+    private cdref: ChangeDetectorRef
   ) {
     console.clear();
   }
